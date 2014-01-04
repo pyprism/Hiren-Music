@@ -2,30 +2,6 @@
 
 include "parseLib/simple_html_dom.php";
 
-$html = file_get_html('http://www.music.com.bd/download/browse/');
-
-
-/**foreach($html->find('.autoindex_a') as $ul)
-{
-       //foreach($ul->find('href') as $li)
-       //{
-       //     echo $li;
-       //}
-	$value = $ul->href;
-	$z[] = $value ;
-
-	//var_dump($z);
-	//echo $z(1);
-}
-
-foreach ($html->find('a.autoindex_a') as $link) {
-$al =$link>getAttribute("href");
-}
-$songName=$html->find('strong',)->plaintext;
-
-
-var_dump($z);
-echo $z[1]; **/
 function select_artist_by_alpha($alpha){
 	$html = file_get_html('http://www.music.com.bd/download/browse/');
 	foreach($html->find('.autoindex_a') as $ul){
@@ -46,22 +22,26 @@ function select_artist_by_alpha($alpha){
 }
 
 function select_artist_by_name(){
-	$html = file_get_html('http://www.music.com.bd/download/browse/A/');
+	//$html = file_get_html('http://www.music.com.bd/download/browse/A/');
+    $html = file_get_html(select_artist_by_alpha($alpha));
 	/**foreach($html->find('.autoindex_a') as $ul){
 		 foreach($ul->find('strong') as $li)
        {
              $links_array[]  = $ul;
-       }
+
 	}**/
 	foreach ($html->find('a.autoindex_a') as $link) {
-  $al =$link->href;
-  //echo $link->plaintext . '<br/>';
-  //echo $al . '<br/>' ;
+      $al =$link->href;
   foreach($link->find('strong') as $tag)
        {
-             echo "$tag" ;
+             $name = $tag->plaintext ;
+             $nisha[$name] = $al ;
        }
-}
+     }
+
+
+ var_dump($nisha) ;
+  // var_dump($x);
 	//return ;
 }
 
