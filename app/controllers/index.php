@@ -17,6 +17,13 @@ $html = file_get_html('http://www.music.com.bd/download/browse/');
 	//var_dump($z);
 	//echo $z(1);
 }
+
+foreach ($html->find('a.autoindex_a') as $link) {
+$al =$link>getAttribute("href");
+}
+$songName=$html->find('strong',)->plaintext;
+
+
 var_dump($z);
 echo $z[1]; **/
 function select_artist_by_alpha($alpha){
@@ -46,10 +53,17 @@ function select_artist_by_name(){
              $links_array[]  = $ul;
        }
 	}**/
-	$es = $html->find('a.autoindex_a strong');
-	$x = $es ;
-	return var_dump($es);
+	foreach ($html->find('a.autoindex_a') as $link) {
+  $al =$link->href;
+  //echo $link->plaintext . '<br/>';
+  //echo $al . '<br/>' ;
+  foreach($link->find('strong') as $tag)
+       {
+             echo "$tag" ;
+       }
+}
+	//return ;
 }
 
-echo select_artist_by_name()
+select_artist_by_name();
 ?>
