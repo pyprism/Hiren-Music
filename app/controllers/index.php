@@ -33,15 +33,42 @@ function select_artist_by_name($alpha){
             global $nisha[$name] = $al ;
        }
      }
-  array_shift($nisha);
+  array_shift($nisha); //Removed "parent directory"
   $make_me_json = array_keys($nisha);
 
 	return $make_me_json;
 }
 
-function get_music_list($artist_name){
+function get_album_list($artist_name){
   $html = $nisha[$artist_name] ;
+    foreach ($html->find('a.autoindex_a') as $link) {
+      $al =$link->href;
+    foreach($link->find('strong') as $tag)
+       {
+             $name = $tag->plaintext ;
+           global $album_name[$name] = $al ;
+       }
+     }
+     //To do - lonely mp3 file check
+     array_shift($album_name); //Removed "parent directory"
+     $make_me_json = array_keys($album_name)
+     return $make_me_json ;
+}
 
+function get_music_list($name){
+  $html = $album_name[$name];
+  foreach ($html->find('a.autoindex_a snap_shots') as $link) {
+      $al =$link->href;
+  foreach($link->find('strong') as $tag)
+       {
+             $name = $tag->plaintext ;
+             //Todo : remove music.com.bd and .mp3 part 
+           global $song_name[$name] = $al ;
+       }
+     }
+}
 
+function get_mp3(){
+ //Todo get mp3 download link
 }
 ?>
