@@ -21,29 +21,27 @@ function select_artist_by_alpha($alpha){
     return $link;
 }
 
-function select_artist_by_name(){
+function select_artist_by_name($alpha){
 	//$html = file_get_html('http://www.music.com.bd/download/browse/A/');
     $html = file_get_html(select_artist_by_alpha($alpha));
-	/**foreach($html->find('.autoindex_a') as $ul){
-		 foreach($ul->find('strong') as $li)
-       {
-             $links_array[]  = $ul;
 
-	}**/
 	foreach ($html->find('a.autoindex_a') as $link) {
       $al =$link->href;
   foreach($link->find('strong') as $tag)
        {
              $name = $tag->plaintext ;
-             $nisha[$name] = $al ;
+            global $nisha[$name] = $al ;
        }
      }
+  array_shift($nisha);
+  $make_me_json = array_keys($nisha);
 
-
- var_dump($nisha) ;
-  // var_dump($x);
-	//return ;
+	return $make_me_json;
 }
 
-select_artist_by_name();
+function get_music_list($artist_name){
+  $html = $nisha[$artist_name] ;
+
+
+}
 ?>
