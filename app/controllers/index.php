@@ -40,7 +40,7 @@ function select_artist_by_name($alpha){
 }
 
 function get_album_list($artist_name){
-  $html = $nisha[$artist_name] ;
+  $html = file_get_html($nisha[$artist_name]) ;
     foreach ($html->find('a.autoindex_a') as $link) {
       $al =$link->href;
     foreach($link->find('strong') as $tag)
@@ -56,7 +56,7 @@ function get_album_list($artist_name){
 }
 
 function get_music_list($name){
-  $html = $album_name[$name];
+  $html = file_get_html($album_name[$name]);
   foreach ($html->find('a.autoindex_a snap_shots') as $link) {
       $al =$link->href;
   foreach($link->find('strong') as $tag)
