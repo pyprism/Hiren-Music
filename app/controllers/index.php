@@ -30,13 +30,13 @@ function select_artist_by_name($alpha){
   foreach($link->find('strong') as $tag)
        {
              $name = $tag->plaintext ;
-            global $nisha[$name] = $al ;
+             $nisha[$name] = $al ;
        }
      }
-  array_shift($nisha); //Removed "parent directory"
-  $make_me_json = array_keys($nisha);
+  //Removed "parent directory"
+  array_shift($nisha);
 
-	return $make_me_json;
+	return $nisha;
 }
 
 function get_album_list($artist_name){
@@ -46,29 +46,36 @@ function get_album_list($artist_name){
     foreach($link->find('strong') as $tag)
        {
              $name = $tag->plaintext ;
-           global $album_name[$name] = $al ;
+             $album_name[$name] = $al ;
        }
      }
      //To do - lonely mp3 file check
      array_shift($album_name); //Removed "parent directory"
-     $make_me_json = array_keys($album_name)
-     return $make_me_json ;
+     return $album_name ;
 }
 
 function get_music_list($name){
-  $html = file_get_html($album_name[$name]);
-  foreach ($html->find('a.autoindex_a snap_shots') as $link) {
+  $html = file_get_html($name);
+  foreach ($html->find('.snap_shots') as $link) {
       $al =$link->href;
   foreach($link->find('strong') as $tag)
        {
              $name = $tag->plaintext ;
-             //Todo : remove music.com.bd and .mp3 part 
-           global $song_name[$name] = $al ;
+             //Todo : remove music.com.bd and .mp3 part
+             $song_name[$name] = $al ;
        }
      }
+     return $song_name;
 }
 
 function get_mp3(){
  //Todo get mp3 download link
+  $html = file_get_html('http://www.music.com.bd/download/Music/N/Nancy/Bhalobasha%20Odhora/Nancy%20-%20Bhorer%20Hawa%20%28music.com.bd%29.mp3.html');
+  foreach ($html->find('#mirror a') as $link) {
+      $al[] =$link->href;
+    }
+    //Todo : link availablity checker
+    return $al[0] ;
 }
+
 ?>
