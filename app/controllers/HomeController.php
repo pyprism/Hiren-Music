@@ -1,5 +1,6 @@
 <?php
 
+include 'index.php' ;
 class HomeController extends BaseController {
 
 	/*
@@ -18,6 +19,12 @@ class HomeController extends BaseController {
 	public function showWelcome()
 	{
 		return View::make('hello');
+	}
+	public function temp()
+	{
+		header('Access-Control-Allow-Origin: *');
+		$x = select_artist_by_name();
+		return Response::json(array_keys($x));
 	}
 
 }

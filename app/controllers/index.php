@@ -3,9 +3,10 @@
 include "parseLib/simple_html_dom.php";
 
 function select_artist_by_alpha($alpha){
-	$html = file_get_html('http://www.music.com.bd/download/browse/');
-	foreach($html->find('.autoindex_a') as $ul){
-	$links_array[]  = $ul->href;
+  $html = file_get_html('http://www.music.com.bd/download/browse/');
+  foreach($html->
+find('.autoindex_a') as $ul){
+  $links_array[]  = $ul->href;
     }
     $alpha_links_pair = ['a' => $links_array[0] , 'b' => $links_array[1] , 'c' => $links_array[2],
     'd'=>$links_array[3], 'e'=>$links_array[4], 'f'=>$links_array[5], 'g'=>$links_array[6],
@@ -16,16 +17,16 @@ function select_artist_by_alpha($alpha){
     'x'=>$links_array[23], 'y'=>$links_array[24], 'z'=>$links_array[25] ];
 
     if (array_key_exists($alpha, $alpha_links_pair)){
-    	$link = $alpha_links_pair[$alpha];
+      $link = $alpha_links_pair[$alpha];
     }
     return $link;
 }
 
-function select_artist_by_name($alpha){
-	//$html = file_get_html('http://www.music.com.bd/download/browse/A/');
-    $html = file_get_html(select_artist_by_alpha($alpha));
+function select_artist_by_name($alpha="x"){
+  $html = file_get_html('http://www.music.com.bd/download/browse/A/');
+   // $html = file_get_html(select_artist_by_alpha($alpha));
 
-	foreach ($html->find('a.autoindex_a') as $link) {
+  foreach ($html->find('a.autoindex_a') as $link) {
       $al =$link->href;
   foreach($link->find('strong') as $tag)
        {
@@ -36,7 +37,7 @@ function select_artist_by_name($alpha){
   //Removed "parent directory"
   array_shift($nisha);
 
-	return $nisha;
+  return $nisha;
 }
 
 function get_album_list($artist_name){
