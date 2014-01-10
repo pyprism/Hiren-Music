@@ -15,7 +15,9 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
 Route::get('json.json', 'HomeController@temp');
+
 Route::get('x', function(){
 	header('Access-Control-Allow-Origin: *');
 	return "425";

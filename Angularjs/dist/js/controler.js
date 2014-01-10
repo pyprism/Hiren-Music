@@ -1,10 +1,10 @@
 var hirenx = angular.module('hiren',['ngRoute']);
 
-hirenx.config(['$routeProvider' ,
+hirenx.config(['$routeProvider',
 	function($routeProvider){
 		$routeProvider
 		.when('/x' ,{
-			templateUrl: '/x.html' ,
+			templateUrl: '/artistsName.html' ,
 			controller : 'hireny'
 		})
 		.otherwise({
