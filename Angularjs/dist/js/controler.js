@@ -23,13 +23,15 @@ hirenx.config(['$routeProvider' ,
     return $resource('http://localhost:8000/x');
 });**/
 
-hirenx.controller('hireny' , function($scope ,$http,$anchorScroll){
+hirenx.controller('hireny' , function($scope ,$http){
 	//$http.defaults.useXDomain = true;
 	//var x  = $resource('http://localhost:8000/json.json');
 	//console.log(User.query());
 	$http.get('http://localhost:8000/json.json').success(function(data){
 		$scope.message = data ;
-		$anchorScroll();
+		$scope.click = function(value){
+			console.log(value);
+		}
 	});
 });
 

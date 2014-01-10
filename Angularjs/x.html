@@ -1,7 +1,14 @@
-<!--<button type="button" class="btn btn-default" ng-repeat="item in message"><li>{{ item }}<br/></li></button>
+<!--<button type="button" class="btn btn-default" ng-repeat="item in message">
+<li>
+	{{ item }}
+	<br/>
+</li>
+</button>
 -->
 <table class="table" >
-  <tr ng-repeat="item in message">
-  	<td >{{ item }}</td>
-  </tr>
+<tr ng-repeat="item in message">
+	<td>
+		<a ng-href='#/x' ng-click="click( item )">{{ item }}</a>
+	</td>
+</tr>
 </table>
