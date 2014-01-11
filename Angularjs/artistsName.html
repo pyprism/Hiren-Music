@@ -8,7 +8,9 @@
 <table class="table" >
 <tr ng-repeat="item in message">
 	<td>
-		<a ng-href='#/x' ng-click="click( item )">{{ item }}</a>
+		<a ng-href='#/x' ng-click="click( item )" class="button grow button pop button float-shadow">
+			<span class="glyphicon glyphicon-user"> {{ item }}</span>
+		</a>
 	</td>
 </tr>
 </table>
