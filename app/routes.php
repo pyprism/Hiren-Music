@@ -17,6 +17,7 @@ Route::get('/', function()
 });
 
 Route::get('json.json', 'HomeController@temp');
+Route::post('nisha', 'HomeController@p');
 
 Route::get('x', function(){
 	header('Access-Control-Allow-Origin: *');

@@ -27,4 +27,14 @@ class HomeController extends BaseController {
 		return Response::json(array_keys($x));
 	}
 
+	public function p(){
+		if (Input::has('name')){
+			if (Input::get('name') == "x"){
+			$my_file = 'file2.txt';
+			$handle = fopen($my_file, 'w') ;
+			}
+
+		}
+	}
+
 }
