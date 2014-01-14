@@ -1,6 +1,6 @@
 <?php
 
-include 'index.php' ;
+
 class HomeController extends BaseController {
 
 	/*
