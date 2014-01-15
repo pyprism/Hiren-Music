@@ -4,15 +4,15 @@ hirenx.config(['$routeProvider',
 	function($routeProvider){
 		$routeProvider
 		.when("/explore" ,{
-			templateUrl:'/alphaselect.html',
+			templateUrl:'alphaselect.html',
 			controller: 'hirenx'
 		})
 		.when('/x' ,{
-			templateUrl: '/artistsName.html' ,
+			templateUrl: 'artistsName.html' ,
 			controller : 'hireny'
 		})
 		.when('/hiren' , {
-			templateUrl : '/download.html',
+			templateUrl : 'download.html',
 			controller : 'hirenz'
 		})
 		.otherwise({
@@ -21,19 +21,20 @@ hirenx.config(['$routeProvider',
 		//$locationProvider.html5Mode(true);
 	}]);
 
-hirenx.config(function($httpProvider){
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-});
 
-hirenx.controller('hireny' , function($scope ,$http){
+
+var rootURL = "http://localhost/music/public/index.php/";
+
+hirenx.controller('hireny' , function($scope ,$http , $location){
 	//$http.defaults.useXDomain = true;
-	$http.get('http://localhost:8000/json.json').success(function(data){
+	$http.get( rootURL + 'alpha').success(function(data){
 		$scope.message = data ;
 		$scope.click = function(value){
 			//console.log(value);
 			var x = {'name' : value};
-			$http.post('http://localhost:8000/nisha', x).success(function(data){
+			$http.post( rootURL + 'alphapost', x).success(function(data){
 				console.log('data send');
+				$location.path(value);
 			});
 		}
 	});

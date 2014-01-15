@@ -18,9 +18,9 @@ function select_artist_by_alpha(){
     return $links_array ;
 }
 
-function select_artist_by_name($alpha="x"){
-  $html = file_get_html('http://www.music.com.bd/download/browse/A/');
-   // $html = file_get_html(select_artist_by_alpha($alpha));
+function select_artist_by_name($alpha){
+  //$html = file_get_html('http://www.music.com.bd/download/browse/A/');
+  $html = file_get_html( 'http://www.music.com.bd/download/browse/' . $alpha);
 
   foreach ($html->find('a.autoindex_a') as $link) {
       $al =$link->href;

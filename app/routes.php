@@ -16,11 +16,11 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('json.json', 'HomeController@temp');
-Route::post('nisha', 'HomeController@p');
+Route::get('alpha', 'HomeController@artist_alpha');
+Route::post('alphapost', 'HomeController@artist_alpha_post');
+Route::post('artistname', 'HomeController@artist_name');
 
 Route::get('x', function(){
-	header('Access-Control-Allow-Origin: *');
 	return "425";
 });
 

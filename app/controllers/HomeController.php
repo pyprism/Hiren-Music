@@ -20,21 +20,31 @@ class HomeController extends BaseController {
 	{
 		return View::make('hello');
 	}
-	public function temp()
+
+	public function artist_alpha()
 	{
-		header('Access-Control-Allow-Origin: *');
-		$x = select_artist_by_name();
-		return Response::json(array_keys($x));
+		//header('Access-Control-Allow-Origin: *');
+		global $alpha ;
+		$alpha = select_artist_by_alpha();
+		return Response::json(array_keys($alpha));
 	}
 
-	public function p(){
+	public function artist_alpha_post(){
+		global $alpha;
+		global $selected_alpha ;
 		if (Input::has('name')){
-			if (Input::get('name') == "x"){
-			$my_file = 'file2.txt';
-			$handle = fopen($my_file, 'w') ;
-			}
-
+			if (Input::get('name')  == $alpha)
+			//$my_file = '/tmp/' . Input::get('name');
+			//$handle = fopen($my_file, 'w') ;
+				$selected_alpha = Input::get('name') ;
 		}
+	}
+
+	public function artist_name()
+	{
+		global $artist_name ;
+		$artist_name = select_artist_by_name();
+		return Response::json(array_keys($artist_name));
 	}
 
 }
