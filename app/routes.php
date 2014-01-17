@@ -19,6 +19,7 @@ Route::get('/', function()
 Route::get('alpha', 'HomeController@artist_alpha');
 Route::post('alphapost', 'HomeController@artist_alpha_post');
 Route::post('artistname', 'HomeController@artist_name');
+Route::post('albumname', 'HomeController@album_name');
 
 Route::get('x', function(){
 	return "425";

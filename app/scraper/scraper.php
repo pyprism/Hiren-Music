@@ -31,10 +31,13 @@ function select_artist_by_name($alpha){
        }
      }
   //Removed "parent directory"
-  array_shift($nisha);
+   array_shift($nisha);
 
   return $nisha;
+  //var_dump($nisha);
 }
+
+//select_artist_by_name('A');
 
 function get_album_list($artist_name){
   $html = file_get_html($nisha[$artist_name]) ;

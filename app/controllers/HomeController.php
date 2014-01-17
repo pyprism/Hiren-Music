@@ -24,26 +24,28 @@ class HomeController extends BaseController {
 	public function artist_alpha()
 	{
 		//header('Access-Control-Allow-Origin: *');
-		global $alpha ;
+		//global $alpha ;
 		$alpha = select_artist_by_alpha();
 		return Response::json(array_keys($alpha));
 	}
 
 	public function artist_alpha_post(){
-		global $alpha;
-		global $selected_alpha ;
-		if (Input::has('name')){
-			if (Input::get('name')  == $alpha)
-			//$my_file = '/tmp/' . Input::get('name');
+		//global $selected_alpha ;
+		if (Input::has('alpha'))
+			//if (Input::get('alpha')  == $alpha) <= is_array
+			//$my_file = '/tmp/' . Input::get('alpha');
 			//$handle = fopen($my_file, 'w') ;
-				$selected_alpha = Input::get('name') ;
-		}
+			$selected_alpha = Input::get('alpha') ;
 	}
 
 	public function artist_name()
 	{
-		global $artist_name ;
-		$artist_name = select_artist_by_name();
+		//global $artist_name ;
+		//global $selected_alpha ;
+		//$selected_alpha = "A";
+		if(Input::has('alpha')){
+			$artist_name = select_artist_by_name(Input::get('alpha'));
+		}
 		return Response::json(array_keys($artist_name));
 	}
 

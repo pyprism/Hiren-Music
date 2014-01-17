@@ -34,9 +34,9 @@ hirenx.config(['$routeProvider',
 		.when('/playlist' , {
 			templateUrl : 'partials/playlist.html',
 			controller : 'hiren'
-		})
-		.otherwise({
-			redirectTo: '/'
+		//})
+		//.otherwise({
+		//	redirectTo: '/'
 		});
 		//$locationProvider.html5Mode(true);
 	}]);
@@ -50,10 +50,24 @@ hirenx.controller('hirenw' , function($scope ,$http , $location){
 		$scope.message = data ;
 		$scope.click = function(value){
 			var x = {'alpha' : value};
-			$http.post( rootURL + 'alphapost', x).success(function(data){
+			$http.post( (rootURL + 'alphapost') , x).success(function(data){
 				console.log(data);
 				$location.path("/artist/" + value );
 			});
 		}
 	});
 });
+
+hirenx.controller('hirenx' , function($scope , $http , $location , $routeParams){
+	$http.post( (rootURL + 'artistname') , {'alpha' : $routeParams.alpha }).success(function(data){
+		$scope.message = data;
+	});
+	$scope.click = function(value){
+		console.log($routeParams.alpha + "/" + value);
+		$location.path("/artist/" + $routeParams.alpha + "/" + value );
+	}
+});
+
+hirenx.controller('hireny',function($scope , $http , $location , $routeParams){
+
+})
