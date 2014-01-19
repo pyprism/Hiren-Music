@@ -49,4 +49,11 @@ class HomeController extends BaseController {
 		return Response::json(array_keys($artist_name));
 	}
 
+	public function album_name()
+	{
+		if(Input::has('alpha') &&  Input::has('name'))
+			$get_list = get_album_list(Input::get('alpha'),Input::get('name'));
+		return Response::json(array_keys($get_list)) ;
+	}
+
 }

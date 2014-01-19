@@ -19,7 +19,6 @@ function select_artist_by_alpha(){
 }
 
 function select_artist_by_name($alpha){
-  //$html = file_get_html('http://www.music.com.bd/download/browse/A/');
   $html = file_get_html( 'http://www.music.com.bd/download/browse/' . $alpha);
 
   foreach ($html->find('a.autoindex_a') as $link) {
@@ -34,13 +33,14 @@ function select_artist_by_name($alpha){
    array_shift($nisha);
 
   return $nisha;
-  //var_dump($nisha);
+
 }
 
-//select_artist_by_name('A');
 
-function get_album_list($artist_name){
-  $html = file_get_html($nisha[$artist_name]) ;
+
+function get_album_list($alpha , $artist_name){
+  //$html = file_get_html($nisha[$artist_name]) ;
+  $html = file_get_html('http://www.music.com.bd/download/browse' . '/' . $alpha . '/' . rawurlencode($artist_name) . "/") ;
     foreach ($html->find('a.autoindex_a') as $link) {
       $al =$link->href;
     foreach($link->find('strong') as $tag)
@@ -54,19 +54,29 @@ function get_album_list($artist_name){
      return $album_name ;
 }
 
-function get_music_list($name){
-  $html = file_get_html($name);
+function get_music_list($alpha , $name , $album){
+  $html = file_get_html('http://www.music.com.bd/download/browse' . "/" . $alpha . '/' . rawurlencode($name) . "/" . rawurlencode($album) . "/");
   foreach ($html->find('.snap_shots') as $link) {
       $al =$link->href;
   foreach($link->find('strong') as $tag)
        {
              $name = $tag->plaintext ;
              //Todo : remove music.com.bd and .mp3 part
-             $song_name[$name] = $al ;
+             if(substr($al, -8) !== 'zip.html'){
+               $nish = explode("http://", $al);
+             }
+             $html = file_get_html( "http://" . $nish[1] );
+             foreach ($html->find('#mirror a') as $link) {
+                $al[] =$link->href;
+             }
+             $song_name[$name] = $al[0] ;
        }
      }
-     return $song_name;
+     //return $song_name;
+     var_dump($song_name) ;
 }
+
+get_music_list('A' , 'Amia%20Matin' , 'Jete%20Hobe%20Kato%20Dur');
 
 function get_mp3(){
   $html = file_get_html('http://www.music.com.bd/download/Music/N/Nancy/Bhalobasha%20Odhora/Nancy%20-%20Bhorer%20Hawa%20%28music.com.bd%29.mp3.html');
