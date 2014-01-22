@@ -54,6 +54,12 @@ function get_album_list($alpha , $artist_name){
      return $album_name ;
 }
 
+//http://stackoverflow.com/questions/834303/php-startswith-and-endswith-functions/834355#834355
+function endsWith($haystack, $needle)
+{
+    return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+}
+
 function get_music_list($alpha , $name , $album){
   $html = file_get_html('http://www.music.com.bd/download/browse' . "/" . $alpha . '/' . rawurlencode($name) . "/" . rawurlencode($album) . "/");
   foreach ($html->find('.snap_shots') as $link) {
@@ -61,30 +67,21 @@ function get_music_list($alpha , $name , $album){
   foreach($link->find('strong') as $tag)
        {
              $name = $tag->plaintext ;
-             //Todo : remove music.com.bd and .mp3 part
-             if(substr($al, -8) !== 'zip.html'){
-               $nish = explode("http://", $al);
-             }
-             $html = file_get_html( "http://" . $nish[1] );
+            $final_name = str_replace("(music.com.bd).mp3", "", $name);
+            if(!(endsWith($al , "zip.html")))   //Removes zip download
+                 $x = preg_replace("/ /", '%20', $al);
+            else
+              break;
+             $html = file_get_html( $x );
              foreach ($html->find('#mirror a') as $link) {
-                $al[] =$link->href;
+                $linku[] =$link->href;
              }
-             $song_name[$name] = $al[0] ;
+             $song_name[$final_name] = $linku[0] ;
        }
      }
-     //return $song_name;
-     var_dump($song_name) ;
+     return $song_name;
 }
 
-get_music_list('A' , 'Amia%20Matin' , 'Jete%20Hobe%20Kato%20Dur');
-
-function get_mp3(){
-  $html = file_get_html('http://www.music.com.bd/download/Music/N/Nancy/Bhalobasha%20Odhora/Nancy%20-%20Bhorer%20Hawa%20%28music.com.bd%29.mp3.html');
-  foreach ($html->find('#mirror a') as $link) {
-      $al[] =$link->href;
-    }
-    //Todo : link availablity checker
-    return $al[0] ;
-}
+//Todo : link availablity checker
 
 ?>
