@@ -1,11 +1,16 @@
 <table class="table" >
 	<tr>
-		<th>Select Artist By Name</th>
+		<th>Select Song</th>
 	</tr>
-<tr ng-repeat="item in message">
+<tr ng-repeat="data in groups" ng-init="count=0">
 	<td>
 		<a  ng-click="click( item )" class="button grow button pop button float-shadow">
-			<span class="glyphicon glyphicon-user"> {{ item }}</span>
+			<span class="glyphicon glyphicon-user"> {{ data.name[0] }}</span>
+		</a>
+	</td>
+	<td>
+		<a  ng-click="click( item )" class="button grow button pop button float-shadow">
+			<span class="glyphicon glyphicon-user"> {{ data.url[0] }}</span>
 		</a>
 	</td>
 </tr>
