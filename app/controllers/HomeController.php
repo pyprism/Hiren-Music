@@ -56,4 +56,10 @@ class HomeController extends BaseController {
 		return Response::json(array_keys($get_list)) ;
 	}
 
+	public function music(){
+		if(Input::has('alpha') && Input::has('name') && Input::has('album'))
+			$hiren = get_music_list(Input::get('alpha') , Input::get('name') , Input::get('album'));
+		return Response::json($hiren) ;
+	}
+
 }

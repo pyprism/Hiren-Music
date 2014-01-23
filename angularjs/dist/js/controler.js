@@ -29,7 +29,6 @@ hiren.config(
 		})
 		.when('/about' , {
 			templateUrl : 'partials/about.html'
-			//controller : 'hirenz'
 		})
 		.when('/playlist' , {
 			templateUrl : 'partials/playlist.html',
@@ -49,12 +48,7 @@ hiren.controller('hirenw' , function($scope ,$http , $location){
 	$http.get( rootURL + 'alpha').success(function(data){
 		$scope.message = data ;
 		$scope.click = function(value){
-			//var x = {'alpha' : value};
-			$location.path("/artist/" + value + "/");
-			//$http.post( (rootURL + 'alphapost') , x).success(function(data){
-				//console.log(data);
-			//	$location.path("/artist/" + value );
-			//});
+			$location.path("/artist/" + value + "/");;
 		}
 	});
 });
@@ -64,7 +58,6 @@ hiren.controller('hirenx' , function($scope , $http , $location , $routeParams){
 		$scope.message = data;
 	});
 	$scope.click = function(value){
-		//console.log($routeParams.alpha + "/" + value);
 		$location.path("/artist/" + $routeParams.alpha + "/" + encodeURI(value) + "/");
 	}
 });
@@ -75,12 +68,17 @@ hiren.controller('hireny',function($scope , $http , $location , $routeParams){
 		$scope.message = data;
 	});
 	$scope.click = function(value){
-		$location.path = ("/artist/" + $routeParams.alpha + "/" + $routeParams.name + '/' + encodeURI(value) + "/" );
+		console.log(value);
+		$location.path ("/artist/" + $routeParams.alpha + "/" + $routeParams.name + '/' + value  + "/");
+		//$location.path("/artist/") ;
 	}
 });
 
-hiren.controller('hirenz',function($scope,$http,$location,$routeParams){
-	$http.post( (rootURL + "hiren/") , {'alpha' : $routeParams.alpha , 'name' : $routeParams.name , 'album' : $routeParams.albumname }).success(function(data){
-		//
+hiren.controller('hirenz' , function($scope , $http , $location , $routeParams){
+	$http.post((rootURL + "music") , {'alpha' : $routeParams.alpha , 'name' : $routeParams.name ,
+		'album' : $routeParams.albumname }).success(function(data){
+		J
+		console.log("x") ;
 	});
+	console.log("ASD");
 });
