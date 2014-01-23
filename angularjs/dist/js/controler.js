@@ -7,22 +7,18 @@ hiren.config(
 			templateUrl:'partials/home.html'
 			//controller: 'hirenx'
 		})
-		//http://www.music.com.bd/download/browse/
 		.when("/explore" ,{
 			templateUrl:'partials/alphaselect.html',
 			controller: 'hirenw'
 		})
-		//http://www.music.com.bd/download/browse/A/
 		.when('/artist/:alpha/' ,{
 			templateUrl: 'partials/artistsName.html' ,
 			controller : 'hirenx'
 		})
-		//http://www.music.com.bd/download/browse/A/Abbasuddin%20Ahmed/
 		.when('/artist/:alpha/:name/' ,{
 			templateUrl: 'partials/albumName.html' ,
 			controller : 'hireny'
 		})
-		//http://www.music.com.bd/download/browse/A/Abbasuddin%20Ahmed/Bhatir%20Ganger%20Naiya/
 		.when('/artist/:alpha/:name/:albumname/' , {
 			templateUrl : 'partials/download.html',
 			controller : 'hirenz'
@@ -36,7 +32,7 @@ hiren.config(
 		//})
 		//.otherwise({
 		//	redirectTo: '/'
-		});
+		//});
 		//$locationProvider.html5Mode(true);
 	});
 
