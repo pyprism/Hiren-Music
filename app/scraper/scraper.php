@@ -18,6 +18,8 @@ function select_artist_by_alpha(){
     return $links_array ;
 }
 
+
+
 function select_artist_by_name($alpha){
   $html = file_get_html( 'http://www.music.com.bd/download/browse/' . $alpha);
 
@@ -76,10 +78,12 @@ function get_music_list($alpha , $name , $album){
              foreach ($html->find('#mirror a') as $link) {
                 $linku[] =$link->href;
              }
-             $song_name[$final_name] = $linku[0] ;
+             $song_name[] = $final_name ;
+             $song_link[] = $linku[2] ;
        }
      }
-     return $song_name;
+     $song = [ "name" => $song_name , "url" => $song_link];
+     return $song;
 }
 
 //Todo : link availablity checker
