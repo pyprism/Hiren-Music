@@ -2,15 +2,10 @@
 	<tr>
 		<th>Select Song</th>
 	</tr>
-<tr ng-repeat="data in groups" ng-init="count=0">
+<tr ng-repeat="x in groups" >
 	<td>
-		<a  ng-click="click( item )" class="button grow button pop button float-shadow">
-			<span class="glyphicon glyphicon-user"> {{ data.name[0] }}</span>
-		</a>
-	</td>
-	<td>
-		<a  ng-click="click( item )" class="button grow button pop button float-shadow">
-			<span class="glyphicon glyphicon-user"> {{ data.url[0] }}</span>
+		<a  ng-click="click( x.url )" class="button grow button pop button float-shadow">
+			<span class="glyphicon glyphicon-user"> {{ x.name }}</span>
 		</a>
 	</td>
 </tr>

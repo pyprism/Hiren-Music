@@ -11,10 +11,6 @@ function select_artist_by_alpha(){
     $links_array[$name] = $links;
     }
   }
-
-   /** if (array_key_exists($alpha, $alpha_links_pair)){
-      $link = $alpha_links_pair[$alpha];
-    }**/
     return $links_array ;
 }
 
@@ -41,7 +37,7 @@ function select_artist_by_name($alpha){
 
 
 function get_album_list($alpha , $artist_name){
-  //$html = file_get_html($nisha[$artist_name]) ;
+
   $html = file_get_html('http://www.music.com.bd/download/browse' . '/' . $alpha . '/' . rawurlencode($artist_name) . "/") ;
     foreach ($html->find('a.autoindex_a') as $link) {
       $al =$link->href;
@@ -63,6 +59,7 @@ function endsWith($haystack, $needle)
 }
 
 function get_music_list($alpha , $name , $album){
+  $song_collection = [] ;
   $html = file_get_html('http://www.music.com.bd/download/browse' . "/" . $alpha . '/' . rawurlencode($name) . "/" . rawurlencode($album) . "/");
   foreach ($html->find('.snap_shots') as $link) {
       $al =$link->href;
@@ -75,17 +72,20 @@ function get_music_list($alpha , $name , $album){
             else
               break;
              $html = file_get_html( $x );
-             foreach ($html->find('#mirror a') as $link) {
-                $linku[] =$link->href;
+             foreach ($html->find('#download_link a') as $link) {
+                $linku =$link->href;
+               // $song[$final_name] = $linku ;
+                $song = [ 'name' => $final_name , 'url' => $linku];
+                array_push($song_collection , $song) ;
              }
-             $song_name[] = $final_name ;
-             $song_link[] = $linku[2] ;
+             //
        }
      }
-     $song = [ "name" => $song_name , "url" => $song_link];
-     return $song;
+     return $song_collection;
 }
-
 //Todo : link availablity checker
+// $songs[$name]=$url;
+//[13:52:40] Nirab kobi: $songs=array('name'=>$name,'url'=>$url);
+
 
 ?>

@@ -63,14 +63,11 @@ hiren.controller('hirenx' , function($scope , $http , $location , $routeParams){
 });
 
 hiren.controller('hireny',function($scope , $http , $location , $routeParams){
-	//var x = encodeURI(name);
 	$http.post((rootURL + 'albumname/') , {'alpha' : $routeParams.alpha , 'name' : $routeParams.name}).success(function(data){
 		$scope.message = data;
 	});
 	$scope.click = function(value){
-		console.log(value);
 		$location.path ("/artist/" + $routeParams.alpha + "/" + $routeParams.name + '/' + value  + "/");
-		//$location.path("/artist/") ;
 	}
 });
 
@@ -79,9 +76,9 @@ hiren.controller('hireny',function($scope , $http , $location , $routeParams){
 hiren.controller('hirenz' , function($scope , $http , $location , $routeParams){
 	$http.post((rootURL + "music") , {'alpha' : $routeParams.alpha , 'name' : $routeParams.name ,
 		'album' : $routeParams.albumname }).success(function(data){
-		var hirenJson = data ;
-		$scope.groups = data;
-		//$scope.url = hirenJson.url;
+		$scope.groups= data;
 	});
-	//console.log("ASD");
+	$scope.click = function(value){
+		console.log(value);
+	}
 });
