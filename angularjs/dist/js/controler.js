@@ -1,3 +1,4 @@
+//Horrible code~  :O  ~
 var hiren = angular.module('hiren',['ngRoute']);
 
 hiren.config(
