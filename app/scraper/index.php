@@ -4,27 +4,24 @@ include "parseLib/simple_html_dom.php";
 
 function select_artist_by_alpha(){
   $html = file_get_html('http://www.music.com.bd/download/browse/');
-  foreach($html->find('.autoindex_a') as $ul){
-  $links  = $ul->href;
-  foreach ($ul->find('strong') as $strong) {
-    $name = $strong->plaintext ;
-    $links_array[$name] = $links;
+  foreach($html->find('a.autoindex_a') as $ul){
+    foreach ($ul->find('strong') as $strong) {
+     $name = $strong->plaintext ;
+     $links_array[] = $name ;
     }
   }
     return $links_array ;
 }
 
 
-
 function select_artist_by_name($alpha){
   $html = file_get_html( 'http://www.music.com.bd/download/browse/' . $alpha);
 
   foreach ($html->find('a.autoindex_a') as $link) {
-      $al =$link->href;
-  foreach($link->find('strong') as $tag)
+   foreach($link->find('strong') as $tag)
        {
              $name = $tag->plaintext ;
-             $nisha[$name] = $al ;
+             $nisha[] = $name ;
        }
      }
   //Removed "parent directory"
@@ -34,20 +31,40 @@ function select_artist_by_name($alpha){
 
 }
 
+function naima(){
+  //$html = file_get_html('http://www.music.com.bd/download/browse/A/Aashor/');
+  $html = file_get_html('http://www.music.com.bd/download/browse/A/Abbasuddin%20Ahmed/');
+  foreach ($html->find('a.snap_shots') as $link) {
+    if(isset($link)){
+   foreach($link->find('strong') as $tag)
+       {
+             $name = $tag->plaintext ;
+             $nisha[] = $name ;
+       }
+     }
+   }
+     return $nisha;
+}
+
+var_dump(naima());
 
 
 function get_album_list($alpha , $artist_name){
 
   $html = file_get_html('http://www.music.com.bd/download/browse' . '/' . $alpha . '/' . rawurlencode($artist_name) . "/") ;
     foreach ($html->find('a.autoindex_a') as $link) {
-      $al =$link->href;
     foreach($link->find('strong') as $tag)
        {
              $name = $tag->plaintext ;
-             $album_name[$name] = $al ;
+             $album_name[] = $name ;
        }
      }
      //To do - lonely mp3 file check
+    foreach ($html->find('a.snap_shots') as $link) {
+      if(isset($link)){
+        $album_name[] = 'others';
+     }
+   }
      array_shift($album_name); //Removed "parent directory"
      return $album_name ;
 }
