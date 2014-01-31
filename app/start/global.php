@@ -81,4 +81,4 @@ App::down(function()
 require app_path().'/filters.php';
 
 //Scraper functions
-include (dirname(__DIR__) . '/scraper/scraper.php') ;
+include (dirname(__DIR__) . '/scraper/index.php') ;
