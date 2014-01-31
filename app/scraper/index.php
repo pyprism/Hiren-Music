@@ -31,10 +31,11 @@ function select_artist_by_name($alpha){
 
 }
 
+//A.autoindex_a.snap_shots
 function naima(){
   //$html = file_get_html('http://www.music.com.bd/download/browse/A/Aashor/');
-  $html = file_get_html('http://www.music.com.bd/download/browse/A/Abbasuddin%20Ahmed/');
-  foreach ($html->find('a.snap_shots') as $link) {
+  $html = file_get_html('http://www.music.com.bd/download/browse/A/Arbovirus/');
+  foreach ($html->find('a[class=autoindex_a snap_shots]') as $link) {
     if(isset($link)){
    foreach($link->find('strong') as $tag)
        {
@@ -47,6 +48,7 @@ function naima(){
 }
 
 var_dump(naima());
+
 
 
 function get_album_list($alpha , $artist_name){
