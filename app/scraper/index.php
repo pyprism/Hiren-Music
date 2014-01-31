@@ -2,6 +2,7 @@
 
 include "parseLib/simple_html_dom.php";
 
+
 function select_artist_by_alpha(){
   $html = file_get_html('http://www.music.com.bd/download/browse/');
   foreach($html->find('a.autoindex_a') as $ul){
@@ -162,9 +163,7 @@ function get_music_list($alpha , $name , $album){
   }
 
 }
-//Todo : link availablity checker
-// $songs[$name]=$url;
-//[13:52:40] Nirab kobi: $songs=array('name'=>$name,'url'=>$url);
+
 
 
 ?>
