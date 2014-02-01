@@ -50,7 +50,7 @@ function naima(){
 
 
 
-function get_album_list($alpha , $artist_name){
+function get_album_list_bak($alpha , $artist_name){
 
   $html = file_get_html('http://www.music.com.bd/download/browse' . '/' . $alpha . '/' . rawurlencode($artist_name) . "/") ;
     foreach ($html->find('a.autoindex_a') as $link) {
@@ -71,7 +71,7 @@ function get_album_list($alpha , $artist_name){
 }
 
 
-function get_album_list_copy($alpha , $artist_name){
+function get_album_list($alpha , $artist_name){
     $html = file_get_html('http://www.music.com.bd/download/browse' . '/' . $alpha . '/' . rawurlencode($artist_name) . "/");
 foreach ($html->find('a.autoindex_a') as $link) {
     foreach($link->find('strong') as $tag){
@@ -104,7 +104,6 @@ foreach ($html->find('a.autoindex_a') as $link) {
 }
 
 
-var_dump(get_album_list_copy('A','Adhar'));
 
 //http://stackoverflow.com/questions/834303/php-startswith-and-endswith-functions/834355#834355
 function endsWith($haystack, $needle)
@@ -112,6 +111,7 @@ function endsWith($haystack, $needle)
     return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
 }
 
+//Return music name and music link
 function get_music_list($alpha , $name , $album){
   $song_collection = [] ;
   if($album != "Others"){
@@ -144,18 +144,14 @@ function get_music_list($alpha , $name , $album){
           if(isset($link)){
               foreach($link->find('strong') as $tag)
               {
-                  $name = $tag->plaintext ;
-                  $mp3[] = $name ;
+
+                $name = $tag->plaintext;
+                $final_name = str_replace("(music.com.bd).mp3", "", $name);
+                $link = $link->href;
+                $song = ['name'=> $final_name , 'url'=> $link];
+                array_push($song_collection, $song);
               }
           }
-      }
-
-      $html = file_get_html( $x );
-      foreach ($html->find('#download_link a') as $link) {
-          $linku =$link->href;
-          // $song[$final_name] = $linku ;
-          $song = [ 'name' => $final_name , 'url' => $linku];
-          array_push($song_collection , $song) ;
       }
 
      return $song_collection ;
@@ -164,6 +160,39 @@ function get_music_list($alpha , $name , $album){
 
 }
 
+
+function nisha($alpha, $name){
+      $song_collection = [] ;
+     $html = file_get_html('http://www.music.com.bd/download/browse' . "/" . $alpha . '/' . rawurlencode($name) . "/" );
+      foreach ($html->find('a[class=autoindex_a snap_shots]') as $link) {
+          if(isset($link)){
+              foreach($link->find('strong') as $tag)
+              {
+                  /**$name = $tag->plaintext ;
+              $final_name = str_replace("(music.com.bd).mp3", "", $name);
+              if(!(endsWith($al , "zip.html")))   //Removes zip download
+                  $x = preg_replace("/ /", '%20', $al);
+              else
+                  break;
+              $html = file_get_html( $x );
+              foreach ($html->find('#download_link a') as $link) {
+                  $linku =$link->href;
+                  // $song[$final_name] = $linku ;
+                  $song = [ 'name' => $final_name , 'url' => $linku];
+                  array_push($song_collection , $song) ;
+                }**/
+                $name = $tag->plaintext;
+                $link = $link->href;
+                $song = ['name'=> $name , 'url'=> $link];
+                array_push($song_collection, $song);
+              }
+          }
+        }
+
+
+
+     return $song_collection ;
+}
 
 
 ?>
