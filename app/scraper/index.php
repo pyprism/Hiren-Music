@@ -2,7 +2,7 @@
 
 include "parseLib/simple_html_dom.php";
 
-
+//Returns Alphabet
 function select_artist_by_alpha(){
   $html = file_get_html('http://www.music.com.bd/download/browse/');
   foreach($html->find('a.autoindex_a') as $ul){
@@ -14,7 +14,7 @@ function select_artist_by_alpha(){
     return $links_array ;
 }
 
-
+//Return artits name
 function select_artist_by_name($alpha){
   $html = file_get_html( 'http://www.music.com.bd/download/browse/' . $alpha);
 
@@ -33,7 +33,7 @@ function select_artist_by_name($alpha){
 }
 
 
-
+//return album name
 function get_album_list($alpha , $artist_name){
     $html = file_get_html('http://www.music.com.bd/download/browse' . '/' . $alpha . '/' . rawurlencode($artist_name) . "/");
 foreach ($html->find('a.autoindex_a') as $link) {
