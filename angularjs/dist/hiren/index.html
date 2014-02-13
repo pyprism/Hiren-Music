@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="build/mediaelement-and-player.min.js"></script>
+	<link rel="stylesheet" href="build/mediaelementplayer.css" />
+<body>
+	<div class="audio-player">
+    <h1>Demo - Preview Song</h1>
+    <audio id="audio-player" src="http://music-com-bd.com/Music/K/Kaderi%20Kibria/Kaderi%20Kibria%20-%20Esho%20Hei%20Boishak%20(music.com.bd).mp3" type="audio/mp3" controls="controls"></audio>
+    <script>
+    $(document).ready(function() {
+        $('#audio-player').mediaelementplayer({
+            alwaysShowControls: true,
+            features: ['playpause','volume','progress'],
+            audioVolume: 'horizontal',
+            audioWidth: 400,
+            audioHeight: 120
+        });
+    });
+</script>
+</div>
+</body>
+</html>

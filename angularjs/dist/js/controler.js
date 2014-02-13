@@ -9,7 +9,7 @@ hiren.config(
 			//controller: 'hirenx'
 		})
 		.when("/explore" ,{
-			templateUrl:'partials/alphaselect.html',
+			templateUrl:'partials/alphaselect2.html',
 			controller: 'hirenw'
 		})
 		.when('/artist/:alpha/' ,{
