@@ -38,19 +38,9 @@
 						</li>
 					</ul>
 					<div class="footer navbar-fixed-bottom"><div class="audio-player">
-    <h1>Demo - Preview Song</h1>
+    <h1>{{ songName }}</h1>
     <audio id="audio-player" src="http://music-com-bd.com/Music/K/Kaderi%20Kibria/Kaderi%20Kibria%20-%20Esho%20Hei%20Boishak%20(music.com.bd).mp3" type="audio/mp3" controls="controls"></audio>
-    <script>
-    $(document).ready(function() {
-        $('#audio-player').mediaelementplayer({
-            alwaysShowControls: true,
-            features: ['playpause','volume','progress'],
-            audioVolume: 'horizontal',
-            audioWidth: 400,
-            audioHeight: 120
-        });
-    });
-</script></div>
+</div>
 				</div>
 			</div>
 		</div>
@@ -62,6 +52,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<script src="dist/js/jquery-2.0.3.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script src="dist/js/angular.min.js"></script>
@@ -70,6 +61,7 @@
 	<script src="dist/js/controler.js"></script>
 	<script src="dist/js/jstorage.min.js"></script>
 	<script src="build/mediaelement-and-player.min.js"></script>
+	<script src="dist/js/player.js"></script>
 
 </body>
 </html>

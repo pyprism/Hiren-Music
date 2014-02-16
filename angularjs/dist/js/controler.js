@@ -9,7 +9,7 @@ hiren.config(
 			//controller: 'hirenx'
 		})
 		.when("/explore" ,{
-			templateUrl:'partials/alphaselect2.html',
+			templateUrl:'partials/alphaselect.html',
 			controller: 'hirenw'
 		})
 		.when('/artist/:alpha/' ,{
@@ -106,7 +106,8 @@ hiren.controller('hirenz' , function($scope , $http , $location , $routeParams){
 	else {
 		$scope.groups = $.jStorage.get($location.path()) ;
 	}
-	$scope.click = function(value){
-		console.log(value);
+	$scope.click = function(url , name ){
+		//console.log(value);
+		$scope.songName = name ;
 	}
 });

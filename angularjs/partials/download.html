@@ -4,7 +4,7 @@
 	</tr>
 <tr ng-repeat="x in groups" >
 	<td>
-		<a  ng-click="click( x.url )" class="button grow button pop button float-shadow">
+		<a  ng-click="click( x.url , x.name )" class="button grow button pop button float-shadow">
 			<span class="glyphicon glyphicon-user"> {{ x.name }}</span>
 		</a>
 	</td>
