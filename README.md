@@ -6,6 +6,9 @@ SIngle Page Full Featured Music Site
 About
 -----
 
+### Status
+
+Under development
 
 Technologies
 ------------
