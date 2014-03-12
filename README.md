@@ -14,4 +14,4 @@ Technologies
 * [Laravel](http://laravel.com/)
 * [PHP Simple HTML DOM Parser](http://simplehtmldom.sourceforge.net/)
 * [Redis](http://redis.io/)
-* And ofcourse good ol' boy (MySQL)[http://www.mysql.com/]
+* And ofcourse good ol' boy [MySQL](http://www.mysql.com/)
