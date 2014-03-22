@@ -20,7 +20,7 @@ class Scraper{
     }
 
     /*
-     * Find out artist name by alphabetical
+     * Alphabetically  find out artist name
      * @return array
      */
     public function select_artist_by_name($alpha)
@@ -166,4 +166,5 @@ class Scraper{
         }
 
     }
+}
 ?>
