@@ -29,7 +29,7 @@ class Scraper{
         //$result = $redis->get($url);
         $result = Redis::get($url);;
         //check if data already exists in redis server
-        //if true, then return from server.
+        //if true, then return from Redis server.
         if($result) return unserialize($result);
         //or execute the whole process
         else{
@@ -43,7 +43,7 @@ class Scraper{
             }
             //Removed "parent directory"
             array_shift($nisha);
-            //and save the result to database
+            //and save the result to Redis database
             Redis::set($url, serialize($nisha));
             return $nisha;
         }
@@ -72,7 +72,7 @@ class Scraper{
                     $raw_album_name[] = $name;
                 }
             }
-            //check if there is any "lonely" mp3 files
+            //check if there is any "poor lonely" mp3 files
             foreach ($html->find('a[class=autoindex_a snap_shots]') as $link) {
                 if (isset($link)) {
                     foreach ($link->find('strong') as $tag) {
@@ -98,9 +98,72 @@ class Scraper{
 
     }
 
-    // source : http://stackoverflow.com/questions/834303/php-startswith-and-endswith-functions/834355#834355
-    function endsWith($haystack, $needle)
+    // @source : http://stackoverflow.com/questions/834303/php-startswith-and-endswith-functions/834355#834355
+    static private function endsWith($haystack, $needle)
     {
         return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+    }
+
+    /**
+     * Return music name and music link
+     * @param $alpha
+     * @param $name
+     * @param $album
+     * @return array|mixed
+     */
+    public function get_music_list($alpha, $name, $album)
+    {
+        $song_collection = [];
+        if ($album != "Others") {
+            $url = 'http://www.music.com.bd/download/browse' . "/" . $alpha . '/' . rawurlencode($name) . "/" . rawurlencode($album) . "/" ;
+            $result = Redis::get($url);
+            if($result) return unserialize($result) ;
+            else{
+                $html = file_get_html($url);
+                foreach ($html->find('.snap_shots') as $link) {
+                    $al = $link->href;
+                    foreach ($link->find('strong') as $tag) {
+                        $name = $tag->plaintext;
+                        $final_name = str_replace("(music.com.bd).mp3", "", $name);
+                        if (!(Scraper::endsWith($al, "zip.html"))) //Removes zip download
+                            $x = preg_replace("/ /", '%20', $al);
+                        else
+                            break;
+                        $html = file_get_html($x);
+                        foreach ($html->find('#download_link a') as $link) {
+                            $linku = $link->href;
+                            // $song[$final_name] = $linku ;
+                            $song = ['name' => $final_name, 'url' => $linku];
+                            array_push($song_collection, $song);
+                        }
+                        //
+                    }
+                }
+                Redis::set($url,serialize($song_collection)) ;
+                return $song_collection;
+            }} else {
+            $url = 'http://www.music.com.bd/download/browse' . "/" . $alpha . '/' . rawurlencode($name) . "/" ;
+            $result = Redis::get($url);
+            if($result) return unserialize($result);
+            else{
+                $html = file_get_html($url);
+                foreach ($html->find('a[class=autoindex_a snap_shots]') as $link) {
+                    if (isset($link)) {
+                        foreach ($link->find('strong') as $tag) {
+
+                            $name = $tag->plaintext;
+                            $final_name = str_replace("(music.com.bd).mp3", "", $name);
+                            $link = $link->href;
+                            $song = ['name' => $final_name, 'url' => $link];
+                            array_push($song_collection, $song);
+                        }
+                    }
+                }
+                Redis::set($url,serialize($song_collection)) ;
+                return $song_collection;
+
+            }
+        }
+
     }
 ?>
