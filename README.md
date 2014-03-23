@@ -1,7 +1,7 @@
 Hiren-Music
 ===========
 
-SIngle Page Full Featured Music Site
+SIngle Page  Music Site
 
 About
 -----
@@ -17,4 +17,4 @@ Technologies
 * [Laravel](http://laravel.com/)
 * [PHP Simple HTML DOM Parser](http://simplehtmldom.sourceforge.net/)
 * [Redis](http://redis.io/)
-* And ofcourse good ol' boy [MySQL](http://www.mysql.com/)
+* [MySQL](http://www.mysql.com/)
