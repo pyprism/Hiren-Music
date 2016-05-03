@@ -4,6 +4,9 @@ from .serializers import AlbumSerializer, DropboxSerializer, MusicSerializer
 
 
 class AlbumList(generics.ListCreateAPIView):
+    """
+    Create, list albums
+    """
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
 
