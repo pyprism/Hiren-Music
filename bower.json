@@ -1,5 +1,5 @@
 {
-  "name": "Hiren-Music",
+  "name": "music",
   "authors": [
     "Ashutosh Das <git.pyprism@gmail.com>"
   ],
@@ -17,7 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.8",
-    "angular-route": "~1.4.8"
+    "jquery-ui": "^1.11.4",
+    "bootstrap": "^3.3.6",
+    "sweetalert": "^1.1.3"
   }
 }
