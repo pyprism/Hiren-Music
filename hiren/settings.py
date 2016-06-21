@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import json
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,8 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'music',
     'rest_framework',
-    'rest_framework_swagger',
-    'corsheaders',
+    'rest_framework_docs',
+    'webpack_loader',
+    'django_extensions',
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -101,10 +104,10 @@ if 'TRAVIS' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'NAME': 'hiren_music',
+            'NAME': JSON_DATA['db_name'],
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'USER': 'hiren',
-            'PASSWORD': 'hiren',
+            'USER': JSON_DATA['db_user'],
+            'PASSWORD': JSON_DATA['db_password'],
             'HOST': 'localhost',
             'PORT': '',
             'CONN_MAX_AGE': 600,
@@ -112,31 +115,12 @@ else:
     }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
 
 USE_I18N = True
 
@@ -161,6 +145,15 @@ STATICFILES_DIRS = (
 )
 
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer'
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser'
+    ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
@@ -170,3 +163,22 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
 }
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
+}
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': '/',  # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
+
+if not DEBUG:
+    REST_FRAMEWORK_DOCS = {
+        'HIDE_DOCS': True
+    }
