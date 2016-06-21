@@ -1,35 +1,10 @@
-from rest_framework import generics
-from .models import Music, Dropbox, Album
-from .serializers import AlbumSerializer, DropboxSerializer, MusicSerializer
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+from .models import Tag, Diary, Notes, Secret
+from rest_framework.decorators import list_route
+from rest_framework.response import Response
+from rest_framework import status
 
-
-class AlbumList(generics.ListCreateAPIView):
-    """
-    Create, list albums
-    """
-    queryset = Album.objects.all()
-    serializer_class = AlbumSerializer
-
-
-class AlbumDetails(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Create, retrieve, update or delete a instance
-    """
-    queryset = Album.objects.all()
-    serializer_class = AlbumSerializer
-
-
-class MusicDetails(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Create, retrieve, update or delete a instance
-    """
-    model = Music
-    serializer_class = MusicSerializer
-
-
-class DropboxDetails(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Create, retrieve, update or delete a instance
-    """
-    model = Dropbox
-    serializer_class = DropboxSerializer
