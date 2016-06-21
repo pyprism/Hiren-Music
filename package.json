@@ -1,0 +1,36 @@
+{
+  "name": "music",
+  "version": "1.0.0",
+  "description": "Music As a Service :heart:",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.12.0",
+    "if-env": "^1.0.0",
+    "mobx": "^2.3.2",
+    "mobx-react": "^3.3.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-helmet": "^3.1.0",
+    "react-router": "^2.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015-webpack": "^6.4.1",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "webpack": "^2.1.0-beta.13",
+    "webpack-bundle-tracker": "0.0.93"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pyprism/Hiren-Music.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/pyprism/Hiren-Music#readme"
+}
