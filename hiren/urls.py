@@ -1,15 +1,16 @@
-from django.conf.urls import patterns, include, url
-from rest_framework.urlpatterns import format_suffix_patterns
-from music import views
+from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
+from rest_framework import routers
+from music import views
 
-urlpatterns = patterns('',
-                       url(r'^$', TemplateView.as_view(template_name="login.html"), name='whatever'),
-                       url(r'^albumList$', views.AlbumList.as_view()),
-                       url(r'^albumList/(?P<pk>[0-9]+)/$', views.AlbumDetails.as_view()),
-                       url(r'^api-token-auth/', 'rest_framework_jwt.views.obtain_jwt_token'),
-                       url(r'^docs/', include('rest_framework_swagger.urls')),
+router = routers.DefaultRouter()
 
-)
-
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = [
+    url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-token-verify/', verify_jwt_token),
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^docs/', include('rest_framework_docs.urls')),
+    url(r'^', TemplateView.as_view(template_name='index.html')),
+]
