@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Hiren Music </title>
+    {% load staticfiles %}
+    {% load render_bundle from webpack_loader %}
+    {% render_bundle 'main' 'css' %}
+</head>
+<body>
+<div id='app'></div>
+<script type="text/javascript" src="{% static '/static/bower/jquery/dist/jquery.min.js' %}" ></script>
+<script type="text/javascript" src="{% static '/static/bower/bootstrap/dist/js/bootstrap.min.js' %}" ></script>
+<script type="text/javascript" src="{% static '/static/bower/jquery-ui/ui/minified/core.min.js' %}" ></script>
+<script type="text/javascript" src="{% static '/static/bower/jquery-ui/ui/minified/widget.min.js' %}" ></script>
+<script type="text/javascript" src="{% static '/static/bower/jquery-ui/ui/minified/position.min.js' %}" ></script>
+<script type="text/javascript" src="{% static '/static/bower/jquery-ui/ui/minified/menu.min.js' %}" ></script>
+<script type="text/javascript" src="{% static '/static/bower/jquery-ui/ui/minified/autocomplete.min.js' %}" ></script>
+<script type="text/javascript" src="{% static '/static/js/sidebar_menu.js' %}" ></script>
+<script type="text/javascript" src="{% static '/static/bower/sweetalert/dist/sweetalert.min.js' %}" ></script>
+<script type="text/javascript" src="{% static '/static/bower/jqcloud2/dist/jqcloud.min.js' %}" ></script>
+{% render_bundle 'main' 'js' %}
+</body>
+</html>
