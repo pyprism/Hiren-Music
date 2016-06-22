@@ -1,7 +1,9 @@
-/config.local.json
+/node_modules
 # Byte-compiled / optimized / DLL files
+/static/js/bundles
 __pycache__/
 *.py[cod]
+*$py.class
 
 # C extensions
 *.so
@@ -43,6 +45,7 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+.hypothesis/
 
 # Translations
 *.mo
@@ -57,6 +60,12 @@ docs/_build/
 # PyBuilder
 target/
 
-.idea
-db.sqlite3
-client_secret.json
+#Ipython Notebook
+.ipynb_checkpoints
+config.local.json
+.idea/
+.env/
+static/bower/
+static/js/bundle.js
+static/js/bundle.js.map
+webpack-stats.json
