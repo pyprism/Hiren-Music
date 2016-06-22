@@ -13,8 +13,8 @@ class Playlist(models.Model):
 
 
 class Music(models.Model):
-    album = models.ForeignKey(Album)
-    playlist = models.ForeignKey(Playlist, null=True)
+    album = models.ForeignKey(Album, related_name='tracks')
+    playlist = models.ForeignKey(Playlist, null=True, related_name='tracks')
     name = models.CharField(max_length=200, unique=True)
     dropbox_id = models.CharField(max_length=500, null=True)
     favorite = models.BooleanField(default=False)
