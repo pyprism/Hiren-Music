@@ -8,11 +8,11 @@ class AlbumSerializer(serializers.ModelSerializer):
 
 
 class MusicSerializer(serializers.ModelSerializer):
-    file = serializers.FileField(required=True)
+    file = serializers.FileField(read_only=True)
 
     class Meta:
         model = Music
-        fields = ('id', 'favorite', 'created_at', 'counter', 'file', 'name', 'album', 'playlist')
+        fields = ('id', 'favorite', 'created_at', 'file', 'counter', 'name', 'album', 'playlist')
 
 
 class PlaylistSerializer(serializers.ModelSerializer):
