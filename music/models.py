@@ -3,6 +3,8 @@ from django.db import models
 
 class Album(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    cover_art = models.CharField(max_length=500, null=True)
+    has_cover = models.BooleanField(default=False)
     favorite = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)
 
@@ -20,5 +22,6 @@ class Music(models.Model):
     favorite = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)
     counter = models.IntegerField(default=0)
+    length = models.IntegerField(default=0)
 
 
