@@ -60,7 +60,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -179,6 +179,6 @@ WEBPACK_LOADER = {
     }
 }
 
-FILE_UPLOAD_MAX_MEMORY_SIZE = 20971520 # 20 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 20971520  # 20 MB
 
 CORS_ORIGIN_ALLOW_ALL = True
