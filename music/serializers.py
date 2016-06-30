@@ -12,7 +12,7 @@ class MusicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Music
-        fields = ('id', 'favorite', 'created_at', 'file', 'counter', 'name', 'album', 'playlist')
+        fields = ('id', 'favorite', 'created_at', 'file', 'counter', 'name', 'album', 'playlist', 'length')
 
 
 class PlaylistSerializer(serializers.ModelSerializer):

@@ -44,7 +44,6 @@ class MusicViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         file_obj = self.request.FILES['file']  # maybe memory hogging
         info = mutagen.File(file_obj)
-        print(info.info.length)
-        #dbx = dropbox.Dropbox(JSON_DATA['dropbox_access_token'])
-        #res = dbx.files_upload(file_obj, '/' + self.request.FILES['file'].name, autorename=True, mute=True)
-        #serializer.save(dropbox_id=res.id)
+        dbx = dropbox.Dropbox(JSON_DATA['dropbox_access_token'])
+        res = dbx.files_upload(file_obj, '/' + self.request.FILES['file'].name, autorename=True, mute=True)
+        serializer.save(dropbox_id=res.id, length=info.info.length)
