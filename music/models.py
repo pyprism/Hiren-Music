@@ -7,6 +7,7 @@ class Album(models.Model):
     has_cover = models.BooleanField(default=False)
     favorite = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)
+    offline = models.BooleanField(default=False)
 
 
 class Playlist(models.Model):
@@ -23,5 +24,6 @@ class Music(models.Model):
     created_at = models.DateField(auto_now_add=True)
     counter = models.IntegerField(default=0)
     length = models.IntegerField(default=0)
+    offline = models.BooleanField(default=False)
 
 
