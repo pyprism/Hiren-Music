@@ -11,6 +11,38 @@ export default class Main extends React.Component {
         browserHistory.push('/');
     }
 
+    componentDidMount() {
+        $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+     $("#menu-toggle-2").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled-2");
+        $('#menu ul').hide();
+    });
+
+     function initMenu() {
+      $('#menu ul').hide();
+      $('#menu ul').children('.current').parent().show();
+      //$('#menu ul:first').show();
+      $('#menu li a').click(
+        function() {
+          var checkElement = $(this).next();
+          if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+            return false;
+            }
+          if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+            $('#menu ul:visible').slideUp('normal');
+            checkElement.slideDown('normal');
+            return false;
+            }
+          }
+        );
+      }
+        $(document).ready(function() {initMenu();});
+    }
+
     render() {
         return (
             <div>
@@ -46,13 +78,16 @@ export default class Main extends React.Component {
                         <ul className="sidebar-nav nav-pills nav-stacked" id="menu">
 
                             <li class="active">
-                                <Link to="/dashboard/" activeStyle={{ color: '#315561'}}><span className="fa-stack fa-lg pull-left"><i className="fa fa-dashboard fa-stack-1x " /></span> Dashboard</Link>
+                                <Link to="/dashboard/" ><span className="fa-stack fa-lg pull-left"><i className="fa fa-dashboard fa-stack-1x " /></span> Dashboard</Link>
                             </li>
                             <li>
                                 <Link to="/dashboard/music/"><span className="fa-stack fa-lg pull-left"><i className="fa fa-music fa-stack-1x "/></span> Music</Link>
                                 <ul className="nav-pills nav-stacked bunny">
                                     <li><Link to="/dashboard/upload/"><span className="fa-stack fa-lg pull-left"><i className="fa fa-file-text fa-stack-1x "/></span> Upload New Music</Link></li>
                                 </ul>
+                            </li>
+                            <li>
+                                <Link to="/dashboard/albums/" activeStyle={{ color: '#315561'}}> <span className="fa-stack fa-lg pull-left"><i className="fa fa-headphones fa-stack-1x "/></span> Albums</Link>
                             </li>
                             <li>
                                 <Link to="/dashboard/tags" activeStyle={{ color: '#315561'}}> <span className="fa-stack fa-lg pull-left"><i className="fa fa-tags fa-stack-1x "/></span> Tags</Link>
