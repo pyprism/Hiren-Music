@@ -20,8 +20,19 @@ class AlbumViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
     """
     API endpoint that allows album to be created, viewed ,edited and deleted.
     """
+    authentication_classes = (CsrfExemptSessionAuthentication, JSONWebTokenAuthentication)
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
+    parser_classes = (FormParser, MultiPartParser)
+
+    def perform_create(self, serializer):
+        if len(self.request.FILES) != 0:
+            file_obj = self.request.FILES['file']
+            dbx = dropbox.Dropbox(JSON_DATA['dropbox_access_token'])
+            res = dbx.files_upload(file_obj, '/' + self.request.FILES['file'].name, autorename=True, mute=True)
+            serializer.save(cover_art=res.id, has_cover=True)
+        else:
+            serializer.save()
 
 
 class PlaylistViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
