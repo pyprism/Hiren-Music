@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard.jsx';
 import Upload from './components/Upload.jsx';
 import axios from 'axios';
 import Album from './components/Album.jsx';
+import AlbumCreate from './components/AlbumUpload.jsx';
 
 
 function authRequired(nextState, replace) {
@@ -18,8 +19,6 @@ function authRequired(nextState, replace) {
             data: {
                 'token': token
             }
-        }).then(function (res) {
-            console.log(res);
         }).catch(function(response) {
             replace('/');
             sweetAlert("Oops!", 'Token Expired', "info");
@@ -35,7 +34,8 @@ ReactDOM.render(
         <Route path="/" component={Login} />
         <Route path="/dashboard" onEnter={authRequired} component={Main}>
             <IndexRoute  component={Dashboard}/>
-            <Route parth="albums" component={Album}>
+            <Route path="albums" component={Album} />
+            <Route path="album/create" component={AlbumCreate} />
             <Route path="stats"  component={Dashboard} />
             <Route path="upload"  component={Upload} />
         </Route>
