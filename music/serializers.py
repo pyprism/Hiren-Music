@@ -3,12 +3,21 @@ from .models import Album, Music, Playlist
 
 
 class AlbumSerializer(serializers.ModelSerializer):
+    file = serializers.FileField(read_only=True)
+    cover_art = serializers.CharField(read_only=True)
+    created_at = serializers.DateField(read_only=True)
+    has_cover = serializers.BooleanField(read_only=True)
+
     class Meta:
         model = Album
+        fields = ('id', 'name', 'cover_art', 'has_cover', 'file', 'favorite', 'created_at', 'offline')
 
 
 class MusicSerializer(serializers.ModelSerializer):
     file = serializers.FileField(read_only=True)
+    created_at = serializers.DateField(read_only=True)
+    counter = serializers.IntegerField(read_only=True)
+    length = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Music
