@@ -19,7 +19,7 @@ class Music(models.Model):
     album = models.ForeignKey(Album, related_name='tracks')
     playlist = models.ForeignKey(Playlist, null=True, related_name='tracks')
     name = models.CharField(max_length=200, unique=True)
-    dropbox_id = models.CharField(max_length=500, null=True)
+    dropbox_id = models.CharField(max_length=500)
     favorite = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)
     counter = models.IntegerField(default=0)
