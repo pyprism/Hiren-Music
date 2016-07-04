@@ -20,9 +20,11 @@ export default class AlbumCreate extends React.Component {
             },
             data: data
         }).then(function (response) {
+            console.log(response);
             if(response.status == 201 )
-                browserHistory.push('/dashboard/album/' + response.data['name']);
+                browserHistory.push('/dashboard/album/' + response.data['id']);
         }).catch(function (response) {
+            console.log(response);
             sweetAlert("Oops!", response.data, "error");
         });
     }
