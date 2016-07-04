@@ -34,6 +34,9 @@ class AlbumViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
         else:
             serializer.save()
 
+    def list(self, request):
+        pass
+
 
 class PlaylistViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
     """D
