@@ -1,26 +1,37 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {Link} from 'react-router';
 import Helmet from "react-helmet";
+import axios from 'axios';
+import { browserHistory } from 'react-router';
 
 export default class Album extends React.Component {
-	render() {
+
+    album(){
+        //e.preventDefault();
+        axios({
+            method: 'get',
+            url: '/api/album/' + this.props.params.id + '/',
+            headers: {
+                'Authorization': 'JWT ' + sessionStorage.getItem('token')
+            }
+        }).then(function (response) {
+            console.log(response);
+        }).catch(function (response) {
+            console.log(response);
+            sweetAlert("Oops!", response.data, "error");
+        });
+    }
+
+    render() {
+        console.log(this.props.params.id);
         return (
-        	<div>
-        		<form onSubmit={this.upload.bind(this)}>
-                    <div className="form-group">
-                        <label>Album Name</label>
-                        <input type="text" className="form-control" required ref="name" placeholder="Title" />
-                    </div>
-                    <div className="form-group">
-                        <label>Cover Art</label>
-                        <input type="text" className="form-control" ref="album" placeholder="Album Name"/>
-                    </div>
-                    <div className="form-group btn btn-default btn-file">
-                        <input type="file"  ref="file" />
-                    </div>
-                    <button type="submit" className="btn btn-default"><i className="fa fa-bookmark"> Save</i></button>
-                </form>
-        	</div>
-        	)
+            <div>
+                <Helmet
+                    title="Music: Album"
+                />
+                Album
+                {this.album()}
+            </div>
+        )
     }
 }
