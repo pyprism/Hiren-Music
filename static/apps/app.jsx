@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard.jsx';
 import Upload from './components/Upload.jsx';
 import axios from 'axios';
 import Album from './components/Album.jsx';
+import Albums from './components/Albums.jsx';
 import AlbumCreate from './components/AlbumUpload.jsx';
 
 
@@ -34,8 +35,9 @@ ReactDOM.render(
         <Route path="/" component={Login} />
         <Route path="/dashboard" onEnter={authRequired} component={Main}>
             <IndexRoute  component={Dashboard}/>
-            <Route path="albums" component={Album} />
+            <Route path="albums" component={Albums} />
             <Route path="album/create" component={AlbumCreate} />
+            <Route path="album/:id" component={Album} />
             <Route path="stats"  component={Dashboard} />
             <Route path="upload"  component={Upload} />
         </Route>
