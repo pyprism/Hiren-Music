@@ -6,10 +6,11 @@
   "dependencies": {
     "axios": "^0.12.0",
     "if-env": "^1.0.0",
-    "mobx": "^2.3.2",
-    "mobx-react": "^3.3.1",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
+    "mobx": "^2.3.4",
+    "mobx-react": "^3.4.0",
+    "react": "^15.2.0",
+    "react-bootstrap-table": "^2.3.7",
+    "react-dom": "^15.2.0",
     "react-helmet": "^3.1.0",
     "react-router": "^2.4.1"
   },
