@@ -10,8 +10,9 @@ export default class Albums extends React.Component {
                     title="Music: Albums"
                 />
                 <p>
-                    <Link to="/dashboard/album/create/" class="btn btn-default"><span className="fa fa-music" /> Create New Album</Link>
+                    <Link to="/dashboard/album/create/" className="btn btn-default"><span className="fa fa-music" /> Create New Album</Link>
                 </p>
+                <hr/>
             </div>
         )
     }
