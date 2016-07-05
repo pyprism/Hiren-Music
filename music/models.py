@@ -19,11 +19,12 @@ class Music(models.Model):
     album = models.ForeignKey(Album, related_name='tracks')
     playlist = models.ForeignKey(Playlist, null=True, related_name='tracks')
     name = models.CharField(max_length=200, unique=True)
-    location = models.CharField(max_length=500)
+    location = models.CharField(max_length=500, default="")
     favorite = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)
     counter = models.IntegerField(default=0)
     length = models.IntegerField(default=0)
     offline = models.BooleanField(default=False)
+
 
 
