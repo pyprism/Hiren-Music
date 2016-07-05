@@ -9,6 +9,7 @@ import axios from 'axios';
 import Album from './components/Album.jsx';
 import Albums from './components/Albums.jsx';
 import AlbumCreate from './components/AlbumUpload.jsx';
+import Tracks from './store/Tracks.jsx';
 
 
 function authRequired(nextState, replace) {
@@ -30,6 +31,8 @@ function authRequired(nextState, replace) {
 
 }
 
+const appState = new Tracks();
+
 ReactDOM.render(
     <Router history={browserHistory} >
         <Route path="/" component={Login} />
@@ -37,9 +40,9 @@ ReactDOM.render(
             <IndexRoute  component={Dashboard}/>
             <Route path="albums" component={Albums} />
             <Route path="album/create" component={AlbumCreate} />
-            <Route path="album/:id" component={Album} />
+            <Route path="album/:id" component={Album} appState={appState}/>
+            <Route path="album/:id/upload"  component={Upload} />
             <Route path="stats"  component={Dashboard} />
-            <Route path="upload"  component={Upload} />
         </Route>
     </Router>,
     document.getElementById('app')
