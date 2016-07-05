@@ -53,7 +53,8 @@ export default class Main extends React.Component {
                     {"rel": "stylesheet", "type": "text/css", "href": "/static/bower/bootstrap/dist/css/bootstrap.min.css"},
                     {"rel": "stylesheet", "type":"text/css", "href": "/static/css/simple-sidebar.css"},
                     {"rel": "stylesheet", "type": "text/css", "href": "/static/bower/font-awesome/css/font-awesome.min.css"},
-                    {"rel": "stylesheet", "type": "text/css", "href": "/static/bower/sweetalert/dist/sweetalert.css"}
+                    {"rel": "stylesheet", "type": "text/css", "href": "/static/bower/sweetalert/dist/sweetalert.css"},
+                    {"rel": "stylesheet", "type": "text/css", "href": "/static/css/react-bootstrap-table-all.min.css"}
                 ]}
                 />
 
@@ -77,7 +78,7 @@ export default class Main extends React.Component {
                     <div id="sidebar-wrapper">
                         <ul className="sidebar-nav nav-pills nav-stacked" id="menu">
 
-                            <li class="active">
+                            <li className="active">
                                 <Link to="/dashboard/" ><span className="fa-stack fa-lg pull-left"><i className="fa fa-dashboard fa-stack-1x " /></span> Dashboard</Link>
                             </li>
                             <li>
