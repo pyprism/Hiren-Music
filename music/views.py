@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets
 from .models import Album, Music, Playlist
 from .serializers import AlbumSerializer, PlaylistSerializer, MusicSerializer
-from rest_framework.decorators import list_route
+from rest_framework.decorators import list_route, detail_route
 from rest_framework.response import Response
 from rest_framework import status
 from hiren.settings import JSON_DATA
@@ -14,6 +14,7 @@ from rest_framework.parsers import FileUploadParser, FormParser, MultiPartParser
 from .auth import CsrfExemptSessionAuthentication
 import mutagen
 import dropbox
+import uuid
 
 
 class AlbumViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
@@ -28,14 +29,20 @@ class AlbumViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
     def perform_create(self, serializer):
         if len(self.request.FILES) != 0:
             file_obj = self.request.FILES['file']
+            file_location = '/' + str(uuid.uuid4()) + self.request.FILES['file'].name
             dbx = dropbox.Dropbox(JSON_DATA['dropbox_access_token'])
-            res = dbx.files_upload(file_obj, '/' + self.request.FILES['file'].name, autorename=True, mute=True)
-            serializer.save(cover_art=res.id, has_cover=True)
+            dbx.files_upload(file_obj, file_location, autorename=True, mute=True)
+            serializer.save(location=file_location, has_cover=True)
         else:
             serializer.save()
 
-    def list(self, request):
-        pass
+    @detail_route(methods=['get'])
+    def tracks(self, request, pk=None):
+        """
+        Get Tracks details
+        """
+        album = Music.objects.filter(album=pk).values()
+        return Response(album, status.HTTP_200_OK)
 
 
 class PlaylistViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
@@ -59,5 +66,6 @@ class MusicViewSet(viewsets.ModelViewSet):
         file_obj = self.request.FILES['file']  # maybe memory hogging
         info = mutagen.File(file_obj)
         dbx = dropbox.Dropbox(JSON_DATA['dropbox_access_token'])
-        res = dbx.files_upload(file_obj, '/' + self.request.FILES['file'].name, autorename=True, mute=True)
-        serializer.save(dropbox_id=res.id, length=info.info.length)
+        file_location = '/' + str(uuid.uuid4()) + self.request.FILES['file'].name
+        dbx.files_upload(file_obj, file_location, mute=True)
+        serializer.save(location=file_location, length=info.info.length/60)
