@@ -4,13 +4,17 @@ import Helmet from "react-helmet";
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import {observer} from "mobx-react";
+import { observable } from 'mobx';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 @observer
 export default class Album extends React.Component {
 
-    album(){
-        //e.preventDefault();
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount ()  {
         axios({
             method: 'get',
             url: '/api/album/' + this.props.params.id + '/' + 'tracks/',
@@ -19,16 +23,15 @@ export default class Album extends React.Component {
             }
         }).then(function (response) {
             console.log(response.data);
-            return response;
-        }).catch(function (response) {
-            console.log(response);
-            sweetAlert("Oops!", response.data, "error");
+            this.props.route.appState.tracks.push.apply(this.props.route.appState.tracks, response.data);
+            //console.log(this.props.route.appState.tracks);
+        }.bind(this)).catch(function (response) {
+            console.error(response);
+            //sweetAlert("Oops!", response.data, "error");
         })
     }
 
-
     render() {
-        var x = [];
         return (
             <div>
                 <Helmet
@@ -39,7 +42,7 @@ export default class Album extends React.Component {
                 </div>
                 <br/>
                 <hr/>
-                <BootstrapTable data={this.props.appState.tracks} striped={true} hover={true}>
+                <BootstrapTable data={this.props.route.appState.tracks} striped={true} hover={true}>
                     <TableHeaderColumn dataField="id" isKey={true} >ID</TableHeaderColumn>
                     <TableHeaderColumn dataField="name" >Name</TableHeaderColumn>
                     <TableHeaderColumn dataField="favorite" >Favorite</TableHeaderColumn>
