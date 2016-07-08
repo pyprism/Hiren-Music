@@ -6,11 +6,10 @@ class AlbumSerializer(serializers.ModelSerializer):
     file = serializers.FileField(read_only=True)
     created_at = serializers.DateField(read_only=True)
     has_cover = serializers.BooleanField(read_only=True)
-    tracks = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Album
-        fields = ('id', 'name', 'has_cover', 'file', 'favorite', 'created_at', 'offline', 'tracks')
+        fields = ('id', 'name', 'has_cover', 'file', 'favorite', 'created_at', 'offline')
 
 
 class MusicSerializer(serializers.ModelSerializer):
