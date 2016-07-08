@@ -42,7 +42,8 @@ class AlbumViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
         Get Tracks details
         """
         album = Music.objects.filter(album=pk).values()
-        return Response(album, status.HTTP_200_OK)
+        result = self.get_serializer(album, many=True)
+        return Response(result.data)
 
 
 class PlaylistViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
