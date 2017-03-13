@@ -1,30 +1,63 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
+
+def validate_range(value):
+    if value < 0 and value > 5:
+        raise ValidationError('%s Invalid Range' % value)
 
 
 class Album(models.Model):
     name = models.CharField(max_length=100, unique=True)
     location = models.CharField(max_length=500, null=True)
     has_cover = models.BooleanField(default=False)
+    rating = models.IntegerField(default=0, validators=[validate_range])
     favorite = models.BooleanField(default=False)
-    created_at = models.DateField(auto_now_add=True)
     offline = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Playlist(models.Model):
     name = models.CharField(max_length=500, unique=True)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Music(models.Model):
-    album = models.ForeignKey(Album, related_name='tracks')
+    album = models.ForeignKey(Album, related_name='tracks', null=True)
     playlist = models.ForeignKey(Playlist, null=True, related_name='tracks')
     name = models.CharField(max_length=200, unique=True)
     location = models.CharField(max_length=500, default="")
+    rating = models.IntegerField(default=0, validators=[validate_range])
     favorite = models.BooleanField(default=False)
-    created_at = models.DateField(auto_now_add=True)
     counter = models.IntegerField(default=0)
     length = models.IntegerField(default=0)
     offline = models.BooleanField(default=False)
-
-
-
+    type = (
+        ('Fok', 'Folk'),
+        ('Jaz', 'Jazz'),
+        ('Blu', 'Blues'),
+        ('Cls', 'Classical'),
+        ('Roc', 'Rock'),
+        ('Pop', 'Pop'),
+        ('Mel', 'Melody'),
+        ('Hip', 'Hip Hop'),
+        ('Orc', 'Orchestra'),
+        ('Opr', 'Opera'),
+        ('Con', 'Country'),
+        ('Ins', 'Instrumental'),
+        ('Tec', 'Techno'),
+        ('Amb', 'Ambient'),
+        ('HMe', 'Heavy Metal'),
+        ('Dis', 'Disco'),
+        ('EDa', 'Euro Dance'),
+        ('Met', 'Metal'),
+        ('Com', 'Comedy'),
+        ('Mov', 'Movie'),
+        ('Rel', 'Religious'),
+        ('Und', 'Undefined')
+    )
+    genre = models.CharField(max_length=3, choices=type, default='Und')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
