@@ -1,5 +1,7 @@
 appdirs==1.4.3
 contextlib2==0.5.4
+coreapi==2.3.0
+coreschema==0.0.4
 Django==1.10.6
 django-appconf==1.0.2
 django-compressor==2.1.1
@@ -8,6 +10,9 @@ django-taggit-serializer==0.1.5
 djangorestframework==3.6.2
 djangorestframework-jwt==1.9.0
 freezegun==0.3.8
+itypes==1.1.0
+Jinja2==2.9.5
+MarkupSafe==1.0
 packaging==16.8
 psycopg2==2.7
 PyJWT==1.4.2
@@ -18,3 +23,4 @@ rcssmin==1.0.6
 requests==2.13.0
 rjsmin==1.0.12
 six==1.10.0
+uritemplate==3.0.0
