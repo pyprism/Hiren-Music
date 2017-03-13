@@ -14,6 +14,7 @@ freezegun==0.3.8
 itypes==1.1.0
 Jinja2==2.9.5
 MarkupSafe==1.0
+mutagen==1.37
 packaging==16.8
 psycopg2==2.7
 PyJWT==1.4.2
