@@ -3,5 +3,5 @@
   "db_name": "",
   "db_user": "",
   "db_password": "",
-  "dropbox_access_token": ""
+  "sentry_dsn": ""
 }
