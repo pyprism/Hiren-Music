@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import json
 import datetime
+import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,11 +25,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 try:
-    with open('config.local.json') as f:
+    with open(BASE_DIR + '/' + 'config.local.json') as f:
         JSON_DATA = json.load(f)
 except FileNotFoundError:
-    with open('config.json') as f:
+    with open(BASE_DIR + '/' + 'config.json') as f:
         JSON_DATA = json.load(f)
+
 SECRET_KEY = os.environ.get('SECRET_KEY', JSON_DATA['secret_key'])
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -46,19 +48,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "compressor",
+    'raven.contrib.django.raven_compat',
     'music',
     'rest_framework',
-    'rest_framework_swagger',
     'webpack_loader',
-    'django_extensions',
-    'corsheaders',
 
 ]
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -138,13 +138,20 @@ STATIC_URL = '/static/'
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    'compressor.finders.CompressorFinder',
 )
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+# django compress
+COMPRESS_ROOT = os.path.join(BASE_DIR, "static")
+
+COMPRESS_OFFLINE = True
+
+# rest framework
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
@@ -165,20 +172,29 @@ REST_FRAMEWORK = {
     ),
 }
 
+# json web token
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000000),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=60 * 60 * 24),
 }
 
+# webpack
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': '/',  # must end with slash
+        'BUNDLE_DIR_NAME': 'js/bundles/',  # must end with slash
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
         'POLL_INTERVAL': 0.1,
         'IGNORE': ['.+\.hot-update.js', '.+\.map']
     }
 }
 
+# upload file size
 FILE_UPLOAD_MAX_MEMORY_SIZE = 20971520  # 20 MB
 
-CORS_ORIGIN_ALLOW_ALL = True
+# sentry.io
+RAVEN_CONFIG = {
+    'dsn': JSON_DATA['sentry_dsn'],
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+}
