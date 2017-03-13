@@ -15,20 +15,7 @@ export default class Album extends React.Component {
     }
 
     componentDidMount ()  {
-        axios({
-            method: 'get',
-            url: '/api/album/' + this.props.params.id + '/' + 'tracks/',
-            headers: {
-                'Authorization': 'JWT ' + sessionStorage.getItem('token')
-            }
-        }).then(function (response) {
-            console.log(response.data);
-            this.props.route.appState.tracks.push.apply(this.props.route.appState.tracks, response.data);
-            //console.log(this.props.route.appState.tracks);
-        }.bind(this)).catch(function (response) {
-            console.error(response);
-            //sweetAlert("Oops!", response.data, "error");
-        })
+        this.props.route.appState.album(this.props.params.id);
     }
 
     render() {
