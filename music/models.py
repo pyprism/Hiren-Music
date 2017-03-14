@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 
 
 def validate_range(value):
-    if value < 0 and value > 5:
+    if 0 < value < 5:
         raise ValidationError('%s Invalid Range' % value)
 
 
@@ -27,7 +27,9 @@ class Playlist(models.Model):
 class Music(models.Model):
     album = models.ForeignKey(Album, related_name='tracks', null=True)
     playlist = models.ForeignKey(Playlist, null=True, related_name='tracks')
-    name = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200, unique=True)
+    artist = models.CharField(max_length=200, unique=True, null=True)
+    youtube = models.URLField(max_length=200, unique=True, null=True)
     location = models.CharField(max_length=500, default="")
     rating = models.IntegerField(default=0, validators=[validate_range])
     favorite = models.BooleanField(default=False)
@@ -56,6 +58,7 @@ class Music(models.Model):
         ('Com', 'Comedy'),
         ('Mov', 'Movie'),
         ('Rel', 'Religious'),
+        ('Rim', 'Remix'),
         ('Und', 'Undefined')
     )
     genre = models.CharField(max_length=3, choices=type, default='Und')
