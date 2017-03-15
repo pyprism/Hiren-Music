@@ -34,10 +34,9 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 //loaders: ['react-hot', 'babel-loader?presets[]=es2015,presets[]=stage-0,presets[]=react,plugins[]=transform-decorators-legacy']
-                use: [
-                    'babel-loader',
-                ],
-                options: {
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
                     presets: [
                         'es2015',
                         'stage-0',
@@ -47,6 +46,8 @@ module.exports = {
                         'transform-decorators-legacy'
                     ]
                 }
+                },
+                ],
             }
         ]
     },
