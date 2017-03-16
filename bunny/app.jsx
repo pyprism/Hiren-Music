@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, browserHistory, IndexRoute} from 'react-router';
 import axios from 'axios';
+import {Login} from './components/Login';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom';
+
 
 function refresh() {
     let token = localStorage.getItem('token');
@@ -44,11 +50,18 @@ function authRequired(nextState, replace) {
 
 }
 
-class HelloMessage extends React.Component {
-  render() {
-    return <div>Hello {this.props.name}</div>;
-  }
-}
+// class HelloMessage extends React.Component {
+//   render() {
+//     return <div>Hello {this.props.name}</div>;
+//   }
+// }
+//
+// ReactDOM.render(<HelloMessage name="Naima" />, document.getElementById('app'));
 
-ReactDOM.render(<HelloMessage name="Naima" />, document.getElementById('app'));
+ReactDOM.render(
+    <Router>
+        <Route path="/" component={Login}/>
+    </Router>,
+    document.getElementById('app')
+);
 
