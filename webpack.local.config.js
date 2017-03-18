@@ -10,7 +10,7 @@ module.exports = {
         'webpack-dev-server/client?http://localhost:3000',
         'webpack/hot/only-dev-server',
         //'webpack/hot/only-dev-server',
-        './bunny/app.jsx'
+        './bunny/app.js'
     ],
 
 
