@@ -5,8 +5,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Helmet from "react-helmet";
 import axios from 'axios';
+import { browserHistory } from 'react-router';
+
 
 export default class Login extends React.Component {
+
     login(e) {
         e.preventDefault();
         axios({
@@ -16,20 +19,20 @@ export default class Login extends React.Component {
                 'username': ReactDOM.findDOMNode(this.refs.username).value,
                 'password': ReactDOM.findDOMNode(this.refs.password).value
             }
-        }).then(function (response) {
+        }).then(function(response) {
             if (response.data['token']) {
                 localStorage.setItem('token', response.data['token']);
-                history.push('/dashboard/');
+                browserHistory.push('/dashboard/');
             }
         }).catch(function (response) {
-                sweetAlert("Oops!", 'Username/Password is not valid!', "error");
-            });
+                sweetAlert("Oops!", 'Username/Password is not valid! ', "error");
+        });
     }
 
     render () {
         return <div className="login">
             <Helmet
-                title="Hiren-Music: Login"
+                title="Hiren-Movie: Login"
                 link={[
                     {"rel": "stylesheet", "href": "/static/css/login.css"},
                     {"rel": "icon", "href": "/static/favicon.ico"},
@@ -50,8 +53,5 @@ export default class Login extends React.Component {
             </form>
 
         </div>
-
-
     }
-
 }
