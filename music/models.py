@@ -9,7 +9,6 @@ def validate_range(value):
 
 class Album(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    location = models.CharField(max_length=500, null=True)
     has_cover = models.BooleanField(default=False)
     rating = models.IntegerField(default=0, validators=[validate_range])
     favorite = models.BooleanField(default=False)
