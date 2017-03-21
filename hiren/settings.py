@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "compressor",
-    'raven.contrib.django.raven_compat',
+    # 'raven.contrib.django.raven_compat',
     'music',
     'rest_framework',
     'webpack_loader',
@@ -193,12 +193,13 @@ WEBPACK_LOADER = {
 FILE_UPLOAD_MAX_MEMORY_SIZE = 20971520  # 20 MB
 
 # sentry.io
-RAVEN_CONFIG = {
-    'dsn': JSON_DATA['sentry_dsn'],
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
-}
+# if not DEBUG:
+#     RAVEN_CONFIG = {
+#         'dsn': JSON_DATA['sentry_dsn'],
+#         # If you are using git, you can also automatically configure the
+#         #  release based on the git info.
+#         'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+#     }
 
 # django querycount
 QUERYCOUNT = {
