@@ -1,10 +1,10 @@
-# from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-# from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 # from django.contrib.auth.models import User
-# from rest_framework import viewsets
-# from .models import Album, Music, Playlist
-# from .serializers import AlbumSerializer, PlaylistSerializer, MusicSerializer
+from rest_framework import viewsets
+from .models import Album, Music, Playlist, B2Account
+from .serializers import AlbumSerializer, PlaylistSerializer, MusicSerializer, B2AccountSerializer
 # from rest_framework.decorators import list_route, detail_route
 # from rest_framework.response import Response
 # from rest_framework import status
@@ -16,6 +16,15 @@
 # import dropbox
 # import uuid
 
+
+class B2AccountViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows bucket name, bucket directory to be created and edited
+    """
+    queryset = B2Account.objects.first()
+    permission_classes = (IsAuthenticated, )
+    authentication_classes = (SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication)
+    serializer_class = B2AccountSerializer
 
 # class AlbumViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
 #     """
