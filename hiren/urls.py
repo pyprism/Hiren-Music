@@ -3,9 +3,10 @@ from django.views.generic import TemplateView
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework import routers
-# from music import views
-#
+from music import views
+
 router = routers.DefaultRouter()
+router.register('bucket', views.B2AccountViewSet)
 # router.register('album', views.AlbumViewSet)
 # router.register('playlist', views.PlaylistViewSet)
 # router.register('music', views.MusicViewSet)
