@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Album, Music, Playlist
+from .models import Album, Music, Playlist, B2Account
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -27,3 +27,7 @@ class PlaylistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlist
         fields = '__all__'
+
+
+class B2AccountSerializer(serializers.ModelSerializer):
+
