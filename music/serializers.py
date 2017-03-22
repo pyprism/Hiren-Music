@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Album, Music, Playlist, B2Account
+from music.utils import b2
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -32,4 +33,9 @@ class PlaylistSerializer(serializers.ModelSerializer):
 class B2AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = B2Account
-        fields = "__all__"
+        fields = ('id', 'bucket_id', 'bucket_dir')
+
+    def create(self, validated_data):
+        b2.auth()  # first generate row then save bucket information
+        obj = B2Account.objects.first().update(**validated_data)
+        return obj
