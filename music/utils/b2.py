@@ -26,7 +26,7 @@ def auth():
     if res.status_code == 200:
         data = json.loads(res.text)
         try:
-            b2 = B2Account.objects.get(id=1)
+            b2 = B2Account.objects.first()
             b2.auth_token = data['authorizationToken']
             b2.api_url = data['apiUrl']
             b2.download_url = data['downloadUrl']
@@ -35,9 +35,7 @@ def auth():
             B2Account.objects.create(auth_token=data['authorizationToken'],
                                      api_url=data['apiUrl'],
                                      download_url=data['downloadUrl'])
+            logger.info("Initial auth token generated.")
     else:
         logger.error(res.text)
-
-
-auth()
 
