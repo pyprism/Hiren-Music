@@ -30,4 +30,6 @@ class PlaylistSerializer(serializers.ModelSerializer):
 
 
 class B2AccountSerializer(serializers.ModelSerializer):
-
+    class Meta:
+        model = B2Account
+        fields = "__all__"
