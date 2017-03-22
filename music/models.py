@@ -63,3 +63,12 @@ class Music(models.Model):
     genre = models.CharField(max_length=3, choices=type, default='Und')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class B2Account(models.Model):
+    auth_token = models.CharField(max_length=200)
+    api_url = models.URLField()
+    download_url = models.URLField()
+    upload_url = models.URLField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
