@@ -21,7 +21,7 @@ class B2AccountViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows bucket name, bucket directory to be created and edited
     """
-    queryset = B2Account.objects.first()
+    queryset = B2Account.objects.all()
     permission_classes = (IsAuthenticated, )
     authentication_classes = (SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication)
     serializer_class = B2AccountSerializer
