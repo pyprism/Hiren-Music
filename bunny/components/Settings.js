@@ -7,6 +7,7 @@ import Helmet from "react-helmet";
 import axios from 'axios';
 import { observer } from "mobx-react";
 import { browserHistory } from 'react-router';
+import SettingsEdit from './SettingsEdit';
 
 @observer
 export default class Settings extends React.Component {
@@ -17,20 +18,32 @@ export default class Settings extends React.Component {
 
     render() {
         if(this.props.route.settings.loaded){
-          return (
-            <div >
-                <div className="row">
-                    <Helmet
-                        title="Hiren-Music: Settings"
-                    />
-                </div>
-                form
-            </div>
-        )}
+            if(this.props.route.settings.conf) {
+                return (
+                    <div >
+                        <div className="row">
+                            <Helmet
+                                title="Hiren-Music: Settings"
+                            />
+                        </div>
+                        form
+                    </div>
+                )
+            } else {
+                return (
+                    <div>
+                        <Helmet
+                            title="Hiren-Music: Settings"
+                        />
+                        <SettingsEdit/>
+                    </div>
+                )
+            }
+        }
 
         return (
             <div>Loading........</div>
         )
 
-       }
+    }
 }
