@@ -18,7 +18,7 @@ export class settings {
             url: '/api/bucket/',
             headers: {'Authorization': "JWT " + localStorage.getItem('token')}
         }).then(function (response) {
-            if((response.data).length) {
+            if((response.data).length > 0) {
                 this.conf = true;
             }
             this.loaded = true;
