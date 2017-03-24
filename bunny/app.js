@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Login from './components/Login';
+import Settings from './components/Settings';
+import All from './components/All';
+import Main from './components/Main';
+import {settings} from './stores/settings';
 import {Router, Route, browserHistory, IndexRoute} from 'react-router';
 
 
@@ -46,17 +50,17 @@ function authRequired(nextState, replace) {
 
 }
 
-class HelloMessage extends React.Component {
-  render() {
-    return <div>Hello {this.props.name}</div>;
-  }
-}
 
-// ReactDOM.render(<HelloMessage name="Naima" />, document.getElementById('app'));
+var conf = new settings();
 
 ReactDOM.render(
     <Router history={browserHistory}>
-        <Route path="/" name="Naima" component={Login}/>
+        <Route path="/" component={Login}/>
+        <Route path="/music" onEnter={authRequired}  component={Main}>
+            <IndexRoute component={All}/>
+            <Route path="all" component={All} />
+            <Route path="settings" settings={conf} component={Settings} />
+        </Route>
     </Router>,
     document.getElementById('app')
 );
