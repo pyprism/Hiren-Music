@@ -5,7 +5,7 @@ from django.test import Client
 
 class IndexPageTest(TestCase):
     def setUp(self):
-        self.c = Client()
+        self.client = Client()
 
     def test_uses_login_template(self):
         response = self.client.get('/')
