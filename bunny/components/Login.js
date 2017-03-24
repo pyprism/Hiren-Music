@@ -22,7 +22,7 @@ export default class Login extends React.Component {
         }).then(function(response) {
             if (response.data['token']) {
                 localStorage.setItem('token', response.data['token']);
-                browserHistory.push('/dashboard/');
+                browserHistory.push('/music/all');
             }
         }).catch(function (response) {
                 sweetAlert("Oops!", 'Username/Password is not valid! ', "error");
