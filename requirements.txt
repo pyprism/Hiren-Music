@@ -11,7 +11,7 @@ djangorestframework==3.6.2
 djangorestframework-jwt==1.10.0
 freezegun==0.3.8
 itypes==1.1.0
-Jinja2==2.9.5
+Jinja2==2.9.6
 MarkupSafe==1.0
 mutagen==1.37
 packaging==16.8
