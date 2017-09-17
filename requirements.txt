@@ -16,7 +16,7 @@ MarkupSafe==1.0
 mutagen==1.38
 packaging==16.8
 psycopg2==2.7
-PyJWT==1.5.2
+PyJWT==1.5.3
 pyparsing==2.2.0
 python-dateutil==2.6.1
 raven==6.1.0
