@@ -1,6 +1,6 @@
 appdirs==1.4.3
 contextlib2==0.5.5
-coreapi==2.3.1
+coreapi==2.3.3
 coreschema==0.0.4
 Django==1.11
 django-appconf==1.0.2
