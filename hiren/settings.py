@@ -42,18 +42,21 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "compressor",
-    # 'raven.contrib.django.raven_compat',
     'music',
     'rest_framework',
-    'webpack_loader',
 
+]
+
+if DEBUG is False:
+    INSTALLED_APPS += [
+        'raven.contrib.django.raven_compat',
+        'cacheops'
 ]
 
 MIDDLEWARE = [
@@ -65,7 +68,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'querycount.middleware.QueryCountMiddleware',
 ]
 
 ROOT_URLCONF = 'hiren.urls'
@@ -124,7 +126,7 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Dhaka'
 
-USE_I18N = True
+USE_I18N = False
 
 USE_L10N = True
 
@@ -173,39 +175,18 @@ REST_FRAMEWORK = {
     ),
 }
 
-# json web token
-JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=60 * 60 * 24),
-    'JWT_ALLOW_REFRESH': True
-}
-
-# webpack
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'js/bundles/',  # must end with slash
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
-        'POLL_INTERVAL': 0.1,
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
-    }
-}
 
 # upload file size
 FILE_UPLOAD_MAX_MEMORY_SIZE = 20971520  # 20 MB
 
 # sentry.io
-# if not DEBUG:
-#     RAVEN_CONFIG = {
-#         'dsn': JSON_DATA['sentry_dsn'],
-#         # If you are using git, you can also automatically configure the
-#         #  release based on the git info.
-#         'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
-#     }
-
-# django querycount
-QUERYCOUNT = {
-    'DISPLAY_DUPLICATES': 10,
-}
+if not DEBUG:
+    RAVEN_CONFIG = {
+        'dsn': JSON_DATA['sentry_dsn'],
+        # If you are using git, you can also automatically configure the
+        #  release based on the git info.
+        'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+    }
 
 # logger
 LOGGING = {
