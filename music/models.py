@@ -24,8 +24,8 @@ class Playlist(models.Model):
 
 
 class Music(models.Model):
-    album = models.ForeignKey(Album, related_name='tracks', null=True)
-    playlist = models.ForeignKey(Playlist, null=True, related_name='tracks')
+    album = models.ForeignKey(Album, related_name='tracks', null=True, on_delete=models.CASCADE)
+    playlist = models.ForeignKey(Playlist, null=True, related_name='tracks', on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
     artist = models.CharField(max_length=200, unique=True, null=True)
     youtube = models.URLField(max_length=200, unique=True, null=True)
