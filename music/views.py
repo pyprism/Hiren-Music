@@ -1,5 +1,4 @@
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 # from django.contrib.auth.models import User
 from rest_framework import viewsets
@@ -23,7 +22,7 @@ class B2AccountViewSet(viewsets.ModelViewSet):
     """
     queryset = B2Account.objects.all()
     permission_classes = (IsAuthenticated, )
-    authentication_classes = (SessionAuthentication, BasicAuthentication, JSONWebTokenAuthentication)
+    authentication_classes = (SessionAuthentication, BasicAuthentication)
     serializer_class = B2AccountSerializer
 
 # class AlbumViewSet(CsrfExemptMixin, viewsets.ModelViewSet):
