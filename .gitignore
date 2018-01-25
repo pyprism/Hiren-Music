@@ -69,3 +69,6 @@ static/bower/
 static/js/bundle.js
 static/js/bundle.js.map
 webpack-stats.json
+
+media/hiren/*
+log/*.log*
