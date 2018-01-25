@@ -17,9 +17,11 @@ from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from music import urls as music
+from base import urls as base
 
 urlpatterns = [
-    path('', include(music)),
+    path('', include(base)),
+    path('app/', include(music)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
