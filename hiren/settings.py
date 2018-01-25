@@ -289,7 +289,7 @@ SESSION_REDIS = {
 CACHEOPS_REDIS = {
     'host': 'localhost',  # redis-server is on same machine
     'port': 6379,         # default redis port
-    'db': 4,             # SELECT non-default redis database
+    'db': 5,             # SELECT non-default redis database
 }
 
 CACHEOPS = {
