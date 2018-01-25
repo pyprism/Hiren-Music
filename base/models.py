@@ -25,11 +25,20 @@ class Account(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    initialized = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
 
     objects = AccountManager()
+
+
+class Setting(models.Model):
+    active = models.BooleanField(default=True)
+    task_type = (
+        ('S', 'Signup'),
+    )
+    task = models.CharField(choices=task_type, max_length=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 
