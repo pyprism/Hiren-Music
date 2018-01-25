@@ -3,6 +3,7 @@ django-appconf==1.0.2
 django-cacheops==4.0.4
 django-compressor==2.2
 django-debug-toolbar==1.9.1
+django-redis-sessions==0.6.1
 funcy==1.10
 psycopg2==2.7.3.2
 pytz==2017.3
