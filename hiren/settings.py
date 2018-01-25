@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'compressor',
     'debug_toolbar',
     'music',
+    'base',
 ]
 
 if DEBUG is False:
