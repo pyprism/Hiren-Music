@@ -277,9 +277,9 @@ SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS = {
     'host': 'localhost',
     'port': 6379,
-    'db': 4,
+    'db': 5,
     'password': '',
-    'prefix': 'mailbox_session',
+    'prefix': 'music_session',
     'socket_timeout': 1
 }
 
