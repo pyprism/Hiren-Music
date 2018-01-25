@@ -8,7 +8,7 @@ django-imagekit==4.0.2
 djangorestframework==3.7.7
 funcy==1.10
 idna==2.6
-mutagen==1.39
+mutagen==1.40
 olefile==0.45
 pilkit==2.0
 Pillow==5.0.0
