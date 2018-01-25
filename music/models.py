@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from base.models import Account
 
 
 def validate_range(value):
@@ -8,6 +9,7 @@ def validate_range(value):
 
 
 class Album(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, unique=True)
     has_cover = models.BooleanField(default=False)
     rating = models.IntegerField(default=0, validators=[validate_range])
@@ -18,13 +20,16 @@ class Album(models.Model):
 
 
 class Playlist(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     name = models.CharField(max_length=500, unique=True)
     offline = models.BooleanField(default=False)
+    public = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
 class Music(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     album = models.ForeignKey(Album, related_name='tracks', null=True, on_delete=models.CASCADE)
     playlist = models.ForeignKey(Playlist, null=True, related_name='tracks', on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
@@ -61,12 +66,13 @@ class Music(models.Model):
         ('Rim', 'Remix'),
         ('Und', 'Undefined')
     )
-    genre = models.CharField(max_length=3, choices=type, default='Und')
+    genre = models.CharField(max_length=3, choices=genre_type, default='Und')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
 class B2Account(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     auth_token = models.CharField(max_length=200)
     api_url = models.URLField()
     download_url = models.URLField()
