@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Hiren-Music: {% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <!-- Favicon-->
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
+    {% load compress %}
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+        {% compress css %}
+        <!-- Bootstrap Core Css -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Waves Effect Css -->
+        <link href="{% static 'css/waves.min.css' %}" rel="stylesheet" />
+
+        <!-- Animation Css -->
+        <link href="{% static 'css/animate.min.css' %}" rel="stylesheet" />
+
+        <!-- Custom Css -->
+        <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/theme-deep-orange.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-select.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-datepicker3.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/quill.snow.css' %}" rel="stylesheet">
+    {% endcompress %}
+</head>
+<body class="theme-deep-orange">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="preloader">
+            <div class="spinner-layer pl-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <p>Please wait...</p>
+    </div>
+</div>
+<!-- #END# Page Loader -->
+<!-- #END# Page Loader -->
+<div class="overlay"></div>
+<!-- #END# Overlay For Sidebars -->
+<nav class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" href="{% url 'inbox' %}">Hiren Music</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Call Search -->
+                <li><a href="javascript:void(0);" class="js-search" data-close="true">Hello, {{ user.get_username }}</a></li>
+                <!-- #END# Call Search -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- #Top Bar -->
+<section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- Menu -->
+        <div class="menu">
+            <ul class="list">
+                <li {% if request.resolver_match.url_name == 'compose' %} class="active" {% endif %}>
+                    <a href="{% url 'compose' %}">
+                        <i class="material-icons">email</i>
+                        <span>Compose</span>
+                    </a>
+                </li>
+                <li class="header">MAIN NAVIGATION</li>
+                <li {% if request.resolver_match.url_name == 'inbox' %} class="active" {% endif %}>
+                     <a href="{% url 'inbox' %}">
+                        <i class="material-icons">inbox</i>
+                        <span>Inbox</span>
+                    </a>
+                </li>
+
+                <li {% if request.resolver_match.url_name == 'sent' %} class="active" {% endif %}>
+                    <a href="{% url 'sent' %}">
+                        <i class="material-icons">done</i>
+                        <span>Sent</span>
+                    </a>
+                </li>
+                <li {% if request.resolver_match.url_name == 'draft' %} class="active" {% endif %}>
+                    <a href="{% url 'draft' %}">
+                        <i class="material-icons">drafts</i>
+                        <span>Drafts</span>
+                    </a>
+                </li>
+                <li {% if request.resolver_match.url_name == 'queue' %} class="active" {% endif %}>
+                    <a href="{% url 'queue' %}">
+                        <i class="material-icons">queue</i>
+                        <span>Queue</span>
+                    </a>
+                </li>
+                <li {% if request.resolver_match.url_name == 'trash' %} class="active" {% endif %}>
+                    <a href="{% url 'trash' %}">
+                        <i class="material-icons">delete</i>
+                        <span>Trash</span>
+                    </a>
+                </li>
+                <li {% if request.resolver_match.url_name == 'settings' %} class="active" {% endif %}>
+                    <a href="{% url 'settings' %}">
+                        <i class="material-icons">settings</i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <i class="material-icons">keyboard_arrow_right</i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- #Menu -->
+    </aside>
+    <!-- #END# Left Sidebar -->
+</section>
+
+{% block content %}{% endblock %}
+
+{% compress js %}
+    <!-- Jquery Core Js -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="{% static 'js/waves.min.js' %}"></script>
+
+    <!-- Validation Plugin Js -->
+    <script src="{% static 'js/jquery.validate.js' %}"></script>
+
+    <!-- Custom Js -->
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/sign-in.js' %}"></script>
+    <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'js/quill.min.js' %}"></script>
+{% endcompress %}
+</body>
+
+</html>
