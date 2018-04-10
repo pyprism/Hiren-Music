@@ -6,7 +6,7 @@ django-debug-toolbar==1.9.1
 django-redis-sessions==0.6.1
 funcy==1.10
 psycopg2==2.7.3.2
-pytz==2018.3
+pytz==2018.4
 raven==6.6.0
 rcssmin==1.0.6
 redis==2.10.6
