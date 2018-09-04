@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'base',
     'music',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'rest_framework.authtoken',
 ]
 
 if DEBUG is False:
