@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import { Link } from "react-router-dom";
 import '../../css/auth.css';
 
 export default class Login extends Component {
 
     componentDidMount() {
-
+        document.title = "Hiren-Music: Login";
     }
 
     render() {
@@ -19,12 +20,12 @@ export default class Login extends Component {
                             <form>
                                 <p>Sign in to continue</p>
                                 <div className="lowin-group">
-                                    <label>Email <a href="#" className="login-back-link">Sign in?</a></label>
+                                    <label>Username</label>
                                     <input type="text" name="username" className="lowin-input"/>
                                 </div>
                                 <div className="lowin-group password-group">
                                     <label>Password </label>
-                                    <input type="password" name="password" autoComplete="current-password"
+                                    <input type="password" name="password"
                                            className="lowin-input"/>
                                 </div>
                                 <button className="lowin-btn login-btn">
@@ -32,7 +33,7 @@ export default class Login extends Component {
                                 </button>
 
                                 <div className="text-foot">
-                                    Don't have an account? <a href="" className="register-link">Register</a>
+                                    Don't have an account? <Link to="/register" className="register-link">Register</Link>
                                 </div>
                             </form>
                         </div>
