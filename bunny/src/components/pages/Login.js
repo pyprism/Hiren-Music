@@ -1,32 +1,44 @@
 import React, {Component} from 'react';
-import '../../css/login.css';
+import '../../css/auth.css';
 
 export default class Login extends Component {
 
     componentDidMount() {
-        const body = document.getElementsByTagName("body");
-        body.classList.add("text-center");
+
     }
 
     render() {
         return (
-            <form className="form-signin">
-                <img className="mb-4" src="" alt="" width="72" height="72"/>
-                    <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                    <label htmlFor="inputEmail" className="sr-only">Email address</label>
-                    <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required
-                           autoFocus/>
-                        <label htmlFor="inputPassword" className="sr-only">Password</label>
-                        <input type="password" id="inputPassword" className="form-control" placeholder="Password"
-                               required/>
-                            <div className="checkbox mb-3">
-                                <label>
-                                    <input type="checkbox" value="remember-me"/> Remember me
-                                </label>
-                            </div>
-                            <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                            <p className="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-            </form>
+            <div className="lowin lowin-blue">
+                <div className="lowin-brand">
+                    <img src={require('../../image/drum.svg')} alt="logo"/>
+                </div>
+                <div className="lowin-wrapper">
+                    <div className="lowin-box lowin-login">
+                        <div className="lowin-box-inner">
+                            <form>
+                                <p>Sign in to continue</p>
+                                <div className="lowin-group">
+                                    <label>Email <a href="#" className="login-back-link">Sign in?</a></label>
+                                    <input type="text" name="username" className="lowin-input"/>
+                                </div>
+                                <div className="lowin-group password-group">
+                                    <label>Password </label>
+                                    <input type="password" name="password" autoComplete="current-password"
+                                           className="lowin-input"/>
+                                </div>
+                                <button className="lowin-btn login-btn">
+                                    Sign In
+                                </button>
+
+                                <div className="text-foot">
+                                    Don't have an account? <a href="" className="register-link">Register</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         )
     }
 }
