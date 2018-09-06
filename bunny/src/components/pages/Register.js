@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
+import swal from 'sweetalert2'
 import '../../css/auth.css';
 
 
@@ -39,9 +40,30 @@ export default class Register extends Component {
             return;
         }
         if(this.state.password !== this.state.repeat_password) {
+            this.setState({password: "", repeat_password: ""});
+            swal('Oops...', "Repeat password didn't match", 'error');
             return;
         }
-        console.log("ok");
+        let formData = new FormData();
+        formData.append('username', this.state.username);
+        formData.append('password', this.state.password);
+        formData.append('repeat_password', this.state.repeat_password);
+        fetch('/api/base/register/', {
+            body: formData,
+            method: 'post'
+        }).then(function (data) {
+            return data.json();
+        }).then(function (data) {
+            if(data.bugs) {
+                this.setState({username: "", password: "", repeat_password: ""});
+                swal("Success", "Registration successful", "success");
+            } else if(data["f**k"])
+                swal("Warning", "Not valid!", "warning");
+        }.bind(this)).catch((error) => {
+            swal("Error", "check console", "error");
+            console.log(error);
+        });
+
     }
 
     render() {
