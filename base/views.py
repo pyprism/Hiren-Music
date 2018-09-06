@@ -7,6 +7,8 @@ from rest_framework.authtoken.models import Token
 from django.http import JsonResponse
 from rest_framework import status
 from django.contrib import auth
+from base.models import Account
+from django.views.decorators.csrf import csrf_exempt
 
 
 def login(request):
@@ -24,4 +26,18 @@ def login(request):
             return JsonResponse({'token': str(token[0])}, status=status.HTTP_200_OK)
         return JsonResponse({'error': 'Username/Password is not valid'}, status=status.HTTP_401_UNAUTHORIZED)
 
+
+@csrf_exempt
+def register(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    repeat_pass = request.POST.get('repeat_password')
+    if password == repeat_pass:
+        count = Account.objects.count()
+        if count == 0:
+            Account.objects.create_superuser(username, password)
+        else:
+            Account.objects.create_user(username, password)
+        return JsonResponse({"bugs": "bunny"}, status=status.HTTP_201_CREATED)
+    return JsonResponse({"f**k": "off"}, status=status.HTTP_400_BAD_REQUEST)
 
