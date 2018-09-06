@@ -11,6 +11,7 @@ from base.models import Account
 from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def login(request):
     """
     token authentication for api
@@ -29,17 +30,18 @@ def login(request):
 
 @csrf_exempt
 def register(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    repeat_pass = request.POST.get('repeat_password')
-    if password == repeat_pass:
-        if Account.objects.filter(username=username).exists():
-            return JsonResponse({"error": "account exists"}, status=status.HTTP_403_FORBIDDEN)
-        count = Account.objects.count()
-        if count == 0:
-            Account.objects.create_superuser(username, password)
-        else:
-            Account.objects.create_user(username, password)
-        return JsonResponse({"bugs": "bunny"}, status=status.HTTP_201_CREATED)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        repeat_pass = request.POST.get('repeat_password')
+        if password == repeat_pass:
+            if Account.objects.filter(username=username).exists():
+                return JsonResponse({"error": "account exists"}, status=status.HTTP_403_FORBIDDEN)
+            count = Account.objects.count()
+            if count == 0:
+                Account.objects.create_superuser(username, password)
+            else:
+                Account.objects.create_user(username, password)
+            return JsonResponse({"bugs": "bunny"}, status=status.HTTP_201_CREATED)
     return JsonResponse({"f**k": "off"}, status=status.HTTP_400_BAD_REQUEST)
 
