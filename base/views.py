@@ -33,6 +33,8 @@ def register(request):
     password = request.POST.get('password')
     repeat_pass = request.POST.get('repeat_password')
     if password == repeat_pass:
+        if Account.objects.filter(username=username).exists():
+            return JsonResponse({"error": "account exists"}, status=status.HTTP_403_FORBIDDEN)
         count = Account.objects.count()
         if count == 0:
             Account.objects.create_superuser(username, password)
