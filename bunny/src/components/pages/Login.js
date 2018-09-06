@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import swal from 'sweetalert2'
 import '../../css/auth.css';
 
@@ -40,7 +40,8 @@ export default class Login extends Component {
             return data.json();
         }).then(function (data) {
             if(data.token) {
-                console.log(data.token);
+                localStorage.setItem("token", data.token);
+                <Redirect to="/dashboard"/>
             } else if(data.error) {
                 this.setState({username: "", password: "", repeat_password: ""});
                 swal("Error", data.error, "error");
