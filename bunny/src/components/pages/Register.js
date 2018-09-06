@@ -57,8 +57,11 @@ export default class Register extends Component {
             if(data.bugs) {
                 this.setState({username: "", password: "", repeat_password: ""});
                 swal("Success", "Registration successful", "success");
+            } else if(data.error) {
+                this.setState({username: "", password: "", repeat_password: ""});
+                swal("Error", data.error, "error");
             } else if(data["f**k"])
-                swal("Warning", "Not valid!", "warning");
+                swal("Warning", "Not valid data!", "warning");
         }.bind(this)).catch((error) => {
             swal("Error", "check console", "error");
             console.log(error);
