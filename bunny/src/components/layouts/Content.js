@@ -7,6 +7,11 @@ import '../../css/dashboard.css';
 export default class Content extends React.Component {
 
     componentDidMount() {
+        if(!localStorage.getItem("token"))
+            this.props.history.push("/");
+
+        document.title = "Hiren-Music: Music";
+
         const $ = window.$;
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
