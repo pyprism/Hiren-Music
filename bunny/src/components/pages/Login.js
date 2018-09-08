@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import { Link, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import swal from 'sweetalert2'
 import '../../css/auth.css';
 
-export default class Login extends Component {
+class Login extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             username: "",
             password: "",
@@ -14,6 +15,8 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
+        if(localStorage.getItem("token"))
+            this.props.history.push("/music");
         document.title = "Hiren-Music: Login";
     }
 
@@ -41,7 +44,7 @@ export default class Login extends Component {
         }).then(function (data) {
             if(data.token) {
                 localStorage.setItem("token", data.token);
-                <Redirect to="/dashboard"/>
+                this.props.history.push("/music");
             } else if(data.error) {
                 this.setState({username: "", password: "", repeat_password: ""});
                 swal("Error", data.error, "error");
@@ -49,7 +52,7 @@ export default class Login extends Component {
                 swal("Warning", "Not valid data!", "warning");
         }.bind(this)).catch((error) => {
             swal("Error", "check console", "error");
-            console.log(error);
+            console.error(error);
         });
 
     }
@@ -92,3 +95,4 @@ export default class Login extends Component {
     }
 }
 
+export default withRouter(Login);
