@@ -15,7 +15,7 @@ class Album(models.Model):
     rating = models.IntegerField(default=0, validators=[validate_range])
     favorite = models.BooleanField(default=False)
     offline = models.BooleanField(default=False)
-    archived = models.BooleanField(default=False)
+    archive = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -58,6 +58,7 @@ class Track(models.Model):
         ('Und', 'Undefined')
     )
     genre = models.CharField(max_length=3, choices=genre_type, default='Und')
+    archived = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
