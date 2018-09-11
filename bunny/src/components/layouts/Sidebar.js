@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faToolbox, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function Sidebar() {
     return (
@@ -13,37 +13,19 @@ export default function Sidebar() {
 
             <ul className="list-unstyled components">
                 <li className="active">
-                    <NavLink to="/music" activeClassName="active" >
+                    <NavLink to="/music">
                         <FontAwesomeIcon icon={faHome} /> Home
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="#" activeClassName="active">
-                        <i className="fas fa-briefcase"/>
-                        About
+                    <NavLink to="/settings">
+                        <FontAwesomeIcon icon={faToolbox}/> Settings
                     </NavLink>
-                    <a href="#pageSubmenu">
-                        <i className="fas fa-copy"/>
-                        Pages
-                    </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i className="fas fa-image"/>
-                        Portfolio
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i className="fas fa-question"/>
-                        FAQ
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i className="fas fa-paper-plane"/>
-                        Contact
-                    </a>
+                    <NavLink to="#">
+                        <FontAwesomeIcon icon={faSignOutAlt}/> Logout
+                    </NavLink>
                 </li>
             </ul>
         </nav>
