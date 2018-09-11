@@ -43,6 +43,8 @@ class Setting(models.Model):
 
 class B2Account(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    app_key = models.CharField(max_length=500)
+    app_key_id = models.CharField(max_length=500)
     auth_token = models.CharField(max_length=200)
     auth_token_validity = models.DateTimeField()
     api_url = models.URLField()
