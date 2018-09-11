@@ -22,12 +22,15 @@ export default class Settings extends React.Component {
                 <Sidebar/>
                 <div id="content">
                     <Navbar/>
-                    <div className="card">
-                        <div className="card-header">
-                            Blackbaze B2
-                        </div>
+                    <div className="card shadow-lg">
+                        <h6 className="card-header text-left">
+                            Backblaze B2
+                        </h6>
                         <div className="card-body">
-                            This is some text within a card body.
+                            <h5 className="card-title ">Special title treatment</h5>
+                            <p className="card-text">With supporting text below as a natural lead-in to additional
+                                content.</p>
+                            <a href="#" className="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 </div>
