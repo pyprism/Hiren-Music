@@ -3,11 +3,13 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.authtoken.models import Token
+from .serializers import BlackbazeSerializer
 from django.http import JsonResponse
 from rest_framework import status
 from django.contrib import auth
-from base.models import Account
+from base.models import Account, B2Account
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -45,3 +47,12 @@ def register(request):
             return JsonResponse({"bugs": "bunny"}, status=status.HTTP_201_CREATED)
     return JsonResponse({"f**k": "off"}, status=status.HTTP_400_BAD_REQUEST)
 
+
+class BlackbazeModelView(ModelViewSet):
+    authentication_classes = (BasicAuthentication, SessionAuthentication, TokenAuthentication)
+    serializer_class = BlackbazeSerializer
+    queryset = B2Account.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user
+        return B2Account.objects.filter(user=user)
