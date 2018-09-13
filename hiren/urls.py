@@ -16,8 +16,15 @@ Including another URLconf
 from django.urls import path, include, re_path
 from base import urls as base
 from django.views.generic import TemplateView
+from django.conf import settings
 
 urlpatterns = [
     path('api/base/', include(base)),
     re_path('.*', TemplateView.as_view(template_name='index.html')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+]
+
