@@ -7,5 +7,5 @@ class BlackbazeSerializer(ModelSerializer):
 
     class Meta:
         model = B2Account
-        fields = ('app_key', 'app_key_id')
+        fields = ('app_key', 'app_key_id', 'upload')
 
