@@ -60,7 +60,7 @@ class BlackbazeModelView(ModelViewSet):
     def perform_create(self, serializer):
         if self.request.POST.get('upload'):  # only one active B2 account
             if B2Account.objects.filter(user=self.request.user, upload=True).exists():
-                query = B2Account.objects.filter(user=self.request.user, upload=True).first()
+                query = B2Account.objects.filter(user=self.request.user, upload=True).order_by('-created_at').first()
                 query.upload = False
                 query.save()
         serializer.save(user=self.request.user)
