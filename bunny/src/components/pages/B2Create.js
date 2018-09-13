@@ -11,6 +11,7 @@ export default class B2Create extends React.Component {
         this.state = {
             app_key: "",
             app_key_id: "",
+            upload: false
         }
     }
 
@@ -31,6 +32,10 @@ export default class B2Create extends React.Component {
         this.setState({app_key_id: event.target.value});
     }
 
+    handleUploadChange(event) {
+        this.setState({upload: event.target.value});
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         if((this.state.app_key).length <=0 || (this.state.app_key_id).length <= 0) {
@@ -39,11 +44,27 @@ export default class B2Create extends React.Component {
         let formData = new FormData();
         formData.append('app_key', this.state.app_key);
         formData.append('app_key_id', this.state.app_key_id);
+        formData.append('upload', this.state.upload);
+
+        fetch('/api/base/b2/blackbaze/', {
+            body: formData,
+            method: 'post',
+            headers:{
+                'Authorization': 'Token ' + localStorage.getItem('token')
+            }
+        }).then(function (data) {
+            return data.json();
+        }).then(function (data) {
+            this.setState({app_key: "", app_key_id: "", upload: false});
+            console.log(data);
+        }.bind(this)).catch(function(err) {
+           console.error(err);
+        });
     }
 
     render() {
 
-        const {app_key, app_key_id} = this.state;
+        const {app_key, app_key_id, upload} = this.state;
 
         return (
             <div className="wrapper">
@@ -54,7 +75,7 @@ export default class B2Create extends React.Component {
                         <h6 className="card-header text-left">
                             Add B2 Account Details
                         </h6>
-                        <div className="card-body" style={{'text-align': 'left'}}>
+                        <div className="card-body" style={{'textAlign': 'left'}}>
                             <form onSubmit={this.handleSubmit.bind(this)}>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputEmail1">App Key</label>
@@ -65,6 +86,10 @@ export default class B2Create extends React.Component {
                                     <label htmlFor="exampleInputPassword1">App Key ID</label>
                                     <input type="text" value={app_key_id}  className="form-control" id="exampleInputPassword1"
                                            onChange={this.handleAppKeyIdChange.bind(this)} placeholder="Enter app key id"/>
+                                </div>
+                                <div className="form-group form-check">
+                                    <input type="checkbox" value={upload}  className="form-check-input" onChange={this.handleUploadChange.bind(this)} id="exampleCheck1"/>
+                                        <label className="form-check-label" htmlFor="exampleCheck1">Enable Upload</label>
                                 </div>
                                 <button type="submit" className="btn btn-primary">Submit</button>
                             </form>
