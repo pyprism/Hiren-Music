@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './../layouts/Sidebar';
 import Navbar from './../layouts/Navbar';
 import sidebarCollapse from '../../utils/sidebarCollapse';
+import swal from 'sweetalert2';
 
 
 export default class B2Create extends React.Component {
@@ -19,7 +20,7 @@ export default class B2Create extends React.Component {
         if(!localStorage.getItem("token"))
             this.props.history.push("/");
 
-        document.title = "Hiren-Music: Add B2 Account Details";
+        document.title = "Hiren-Music: Add B2 Account";
 
         sidebarCollapse();
     }
@@ -33,7 +34,7 @@ export default class B2Create extends React.Component {
     }
 
     handleUploadChange(event) {
-        this.setState({upload: event.target.value});
+        this.setState({upload: event.target.checked});
     }
 
     handleSubmit(event) {
@@ -50,15 +51,17 @@ export default class B2Create extends React.Component {
             body: formData,
             method: 'post',
             headers:{
-                'Authorization': 'Token ' + localStorage.getItem('token')
+                'Authorization': 'Token ' + localStorage.getItem('token'),
             }
         }).then(function (data) {
             return data.json();
         }).then(function (data) {
             this.setState({app_key: "", app_key_id: "", upload: false});
-            console.log(data);
+            this.props.history.push("/settings");
+            swal("Saved", "B2 account details has been added", "success");
         }.bind(this)).catch(function(err) {
            console.error(err);
+           swal("Error", "check console", "error");
         });
     }
 
@@ -73,7 +76,7 @@ export default class B2Create extends React.Component {
                     <Navbar/>
                     <div className="card shadow-lg">
                         <h6 className="card-header text-left">
-                            Add B2 Account Details
+                            Add B2 Account
                         </h6>
                         <div className="card-body" style={{'textAlign': 'left'}}>
                             <form onSubmit={this.handleSubmit.bind(this)}>
