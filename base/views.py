@@ -49,7 +49,7 @@ def register(request):
 
 
 class BlackbazeModelView(ModelViewSet):
-    authentication_classes = (BasicAuthentication, SessionAuthentication, TokenAuthentication)
+    authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication)
     serializer_class = BlackbazeSerializer
     queryset = B2Account.objects.all()
 
@@ -58,15 +58,15 @@ class BlackbazeModelView(ModelViewSet):
         return B2Account.objects.filter(user=user)
 
     def perform_create(self, serializer):
-        if self.request.POST.get('upload'):  # only one active B2 account
+        if self.request.POST.get('upload') == 'true':  # only one active B2 account
             if B2Account.objects.filter(user=self.request.user, upload=True).exists():
-                query = B2Account.objects.filter(user=self.request.user, upload=True).order_by('-created_at').first()
+                query = B2Account.objects.filter(user=self.request.user, upload=True).first()
                 query.upload = False
                 query.save()
         serializer.save(user=self.request.user)
 
     def perform_update(self, serializer):
-        if self.request.POST.get('upload'):  # only one active B2 account
+        if self.request.POST.get('upload') == 'true':  # only one active B2 account
             if B2Account.objects.filter(user=self.request.user, upload=True).exists():
                 query = B2Account.objects.filter(user=self.request.user, upload=True).first()
                 query.upload = False
