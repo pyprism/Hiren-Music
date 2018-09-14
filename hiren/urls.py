@@ -20,11 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('api/base/', include(base)),
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path('.*', TemplateView.as_view(template_name='index.html')),
-]
-
-if settings.DEBUG:
-    urlpatterns += [
-        re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
