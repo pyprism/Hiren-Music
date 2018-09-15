@@ -32,6 +32,7 @@ class Account(AbstractBaseUser):
 
 
 class Setting(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
     task_type = (
         ('S', 'Signup'),
