@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.authtoken.models import Token
-from .serializers import BlackbazeSerializer
+from .serializers import BlackbazeSerializer, SettingsSerializer
 from django.http import JsonResponse
 from rest_framework import status
 from django.contrib import auth
-from base.models import Account, B2Account
+from base.models import Account, B2Account, Setting
 from django.views.decorators.csrf import csrf_exempt
 from utils.b2 import b2_auth
 
@@ -73,3 +73,16 @@ class BlackbazeModelView(ModelViewSet):
                 query = B2Account.objects.filter(user=self.request.user, upload=True).first()
                 query.upload = False
                 query.save()
+
+
+class SettingsModelView(ModelViewSet):
+    authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication)
+    serializer_class = SettingsSerializer
+    queryset = Setting.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user
+        return Setting.objects.filter(user=user)
+
+
+
