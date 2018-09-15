@@ -11,6 +11,7 @@ from rest_framework import status
 from django.contrib import auth
 from base.models import Account, B2Account
 from django.views.decorators.csrf import csrf_exempt
+from utils.b2 import b2_auth
 
 
 @csrf_exempt
@@ -58,15 +59,16 @@ class BlackbazeModelView(ModelViewSet):
         return B2Account.objects.filter(user=user)
 
     def perform_create(self, serializer):
-        if self.request.POST.get('upload') == 'true':  # only one active B2 account
+        if self.request.POST.get('upload') or self.request.POST.get('upload') == 'true':  # only one active B2 account
             if B2Account.objects.filter(user=self.request.user, upload=True).exists():
                 query = B2Account.objects.filter(user=self.request.user, upload=True).first()
                 query.upload = False
                 query.save()
         serializer.save(user=self.request.user)
+        b2_auth(self.request.user.username)
 
     def perform_update(self, serializer):
-        if self.request.POST.get('upload') == 'true':  # only one active B2 account
+        if self.request.POST.get('upload') or self.request.POST.get('upload') == 'true':  # only one active B2 account
             if B2Account.objects.filter(user=self.request.user, upload=True).exists():
                 query = B2Account.objects.filter(user=self.request.user, upload=True).first()
                 query.upload = False
