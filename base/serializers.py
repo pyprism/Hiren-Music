@@ -11,3 +11,10 @@ class BlackbazeSerializer(ModelSerializer):
         fields = ('id', 'app_key', 'app_key_id', 'upload', 'verification')
         read_only_fields = ('verification', )
 
+
+class SettingsSerializer(ModelSerializer):
+
+    class Meta:
+        model = Setting
+        fields = ('active', )
+
