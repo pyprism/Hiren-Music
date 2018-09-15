@@ -4,8 +4,10 @@ from .models import Setting, B2Account
 
 
 class BlackbazeSerializer(ModelSerializer):
+    verification = serializers.NullBooleanField()
 
     class Meta:
         model = B2Account
-        fields = ('app_key', 'app_key_id', 'upload')
+        fields = ('id', 'app_key', 'app_key_id', 'upload', 'verification')
+        read_only_fields = ('verification', )
 
