@@ -15,12 +15,20 @@ Including another URLconf
 """
 from django.urls import path, include, re_path
 from base import urls as base
+from music import urls as music
 from django.views.generic import TemplateView
 from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('api/base/', include(base)),
+    path('api/music/', include(music)),
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    re_path('.*', TemplateView.as_view(template_name='index.html')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if not settings.DEBUG:
+    urlpatterns += [
+        re_path('.*', TemplateView.as_view(template_name='index.html')),
 ]
+
 
