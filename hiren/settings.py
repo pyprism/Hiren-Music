@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
+    'imagekit'
 ]
 
 if DEBUG is False:
@@ -284,5 +285,8 @@ CORS_ALLOW_METHODS = (
     'POST'
 )
 
+# media settings
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
