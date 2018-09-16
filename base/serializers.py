@@ -5,16 +5,22 @@ from .models import Setting, B2Account
 
 class BlackbazeSerializer(ModelSerializer):
     verification = serializers.NullBooleanField()
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault(),
+    )
 
     class Meta:
         model = B2Account
-        fields = ('id', 'app_key', 'app_key_id', 'upload', 'verification')
+        fields = ('id', 'app_key', 'app_key_id', 'upload', 'verification', 'user')
         read_only_fields = ('verification', )
 
 
 class SettingsSerializer(ModelSerializer):
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault(),
+    )
 
     class Meta:
         model = Setting
-        fields = ('active', )
+        fields = ('active', 'user')
 
