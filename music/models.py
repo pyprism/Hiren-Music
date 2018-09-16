@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 from base.models import Account
 
 
@@ -8,10 +10,25 @@ def validate_range(value):
         raise ValidationError('%s Invalid Range' % value)
 
 
+class Musician(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    name = models.CharField(max_length=500)
+    picture = models.ImageField(upload_to='image/musician', null=True)
+    picture_thumbnail = ImageSpecField(source='picture',
+                                       processors=[ResizeToFill(500, 350)],
+                                       format='JPEG',
+                                       options={'quality': 90})
+
+
 class Album(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     name = models.CharField(max_length=600)
-    has_cover = models.BooleanField(default=False)
+    musician = models.ForeignKey(Musician, on_delete=models.PROTECT, null=True)
+    picture = models.ImageField(upload_to='image/album', null=True)
+    picture_thumbnail = ImageSpecField(source='picture',
+                                       processors=[ResizeToFill(500, 350)],
+                                       format='JPEG',
+                                       options={'quality': 90})
     rating = models.IntegerField(default=0, validators=[validate_range])
     favorite = models.BooleanField(default=False)
     offline = models.BooleanField(default=False)
@@ -24,6 +41,7 @@ class Track(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     album = models.ForeignKey(Album, related_name='tracks', null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
+    musician = models.ForeignKey(Musician, on_delete=models.PROTECT, null=True)
     artist = models.CharField(max_length=200, unique=True, null=True)
     youtube = models.URLField(max_length=200, unique=True, null=True)
     location = models.CharField(max_length=500, default="")
