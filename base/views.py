@@ -54,10 +54,6 @@ class BlackbazeModelView(ModelViewSet):
     serializer_class = BlackbazeSerializer
     queryset = B2Account.objects.all()
 
-    def get_queryset(self):
-        user = self.request.user
-        return B2Account.objects.filter(user=user)
-
     def perform_create(self, serializer):
         if self.request.POST.get('upload') or self.request.POST.get('upload') == 'true':  # only one active B2 account
             if B2Account.objects.filter(user=self.request.user, upload=True).exists():
@@ -80,9 +76,6 @@ class SettingsModelView(ModelViewSet):
     serializer_class = SettingsSerializer
     queryset = Setting.objects.all()
 
-    def get_queryset(self):
-        user = self.request.user
-        return Setting.objects.filter(user=user)
 
 
 
