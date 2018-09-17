@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from base.models import Account
@@ -29,7 +30,7 @@ class Album(models.Model):
                                        processors=[ResizeToFill(500, 350)],
                                        format='JPEG',
                                        options={'quality': 90})
-    rating = models.IntegerField(default=0, validators=[validate_range])
+    rating = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     favorite = models.BooleanField(default=False)
     offline = models.BooleanField(default=False)
     archive = models.BooleanField(default=False)
