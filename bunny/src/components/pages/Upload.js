@@ -7,9 +7,38 @@ export default class Upload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
-            data: []
+            loading: true,
+            musician: [],
+            album: [],
         }
+    }
+
+    getMusician() {
+        return new Promise(function (resolve, reject) {
+            fetch('/api/music/musician/', {
+                headers: {
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                }
+            }).then(data => {
+                resolve(data.json());
+            }).catch(err => {
+                reject(err);
+            });
+        });
+    }
+
+    getAlbum() {
+        return new Promise(function (resolve, reject) {
+            fetch('/api/music/album/', {
+                headers: {
+                    'Authorization': 'Token ' + localStorage.getItem('token'),
+                }
+            }).then(data => {
+                resolve(data.json());
+            }).catch(err => {
+                reject(err);
+            })
+        });
     }
 
     componentDidMount() {
@@ -17,6 +46,16 @@ export default class Upload extends React.Component {
             this.props.history.push("/");
 
         document.title = "Hiren-Music: Upload";
+
+        Promise.all([this.getMusician(), this.getAlbum()])
+            .then(data =>  {
+                console.log(data[0]);
+                console.log(data[1]);
+                this.setState({loading: false});
+            })
+            .catch(err => {
+                console.error(err);
+            })
     }
 
     render() {
