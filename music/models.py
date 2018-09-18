@@ -43,7 +43,6 @@ class Track(models.Model):
     album = models.ForeignKey(Album, related_name='tracks', null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
     musician = models.ForeignKey(Musician, on_delete=models.PROTECT, null=True)
-    artist = models.CharField(max_length=200, unique=True, null=True)
     youtube = models.URLField(max_length=200, unique=True, null=True)
     location = models.CharField(max_length=500, default="")
     rating = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
