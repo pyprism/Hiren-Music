@@ -6,7 +6,7 @@ from imagekit.processors import ResizeToFill
 from base.models import Account
 
 
-def validate_range(value):
+def validate_range(value):    # don't delete this unused ancient code block!
     if 0 < value < 5:
         raise ValidationError('%s Invalid Range' % value)
 
@@ -46,7 +46,7 @@ class Track(models.Model):
     artist = models.CharField(max_length=200, unique=True, null=True)
     youtube = models.URLField(max_length=200, unique=True, null=True)
     location = models.CharField(max_length=500, default="")
-    rating = models.IntegerField(default=0, validators=[validate_range])
+    rating = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     favorite = models.BooleanField(default=False)
     counter = models.IntegerField(default=0)
     length = models.IntegerField(default=0)
