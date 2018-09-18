@@ -13,7 +13,7 @@ def validate_range(value):    # don't delete this unused ancient code block!
 
 class Musician(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=500, unique=True)
     picture = models.ImageField(upload_to='image/musician', null=True)
     picture_thumbnail = ImageSpecField(source='picture',
                                        processors=[ResizeToFill(500, 350)],
@@ -23,7 +23,7 @@ class Musician(models.Model):
 
 class Album(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    name = models.CharField(max_length=600)
+    name = models.CharField(max_length=600, unique=True)
     musician = models.ForeignKey(Musician, on_delete=models.PROTECT, null=True)
     picture = models.ImageField(upload_to='image/album', null=True)
     picture_thumbnail = ImageSpecField(source='picture',
@@ -41,7 +41,7 @@ class Album(models.Model):
 class Track(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     album = models.ForeignKey(Album, related_name='tracks', null=True, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     musician = models.ForeignKey(Musician, on_delete=models.PROTECT, null=True)
     artist = models.CharField(max_length=200, unique=True, null=True)
     youtube = models.URLField(max_length=200, unique=True, null=True)
