@@ -16,7 +16,7 @@ class MusicianSerializer(ModelSerializer):
 
 
 class AlbumSerializer(ModelSerializer):
-    musician = MusicianSerializer(many=True)
+    musician = MusicianSerializer()
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault(),
     )
@@ -28,17 +28,13 @@ class AlbumSerializer(ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        print("Asasass1asa5s4as4asassas24asa4s4a5sas")
         musician_data = validated_data.pop('musician')
         musician, created = Musician.objects.get_or_create(user=self.context['request'].user,
                                                            name=musician_data['name'])
-        print(created)
-        print(musician)
         album = Album.objects.create(musician=musician,  **validated_data)
         return album
 
     def update(self, instance, validated_data):
-        print("updatesas5s4asas")
         pass
 
 
