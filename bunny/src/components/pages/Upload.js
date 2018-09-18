@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './../layouts/Sidebar';
 import Navbar from './../layouts/Navbar';
+import Select from 'react-select';
 
 
 export default class Upload extends React.Component {
@@ -95,14 +96,14 @@ export default class Upload extends React.Component {
                         <div className="card-body">
                             <form>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Email address</label>
-                                    <input type="email" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Enter email"/>
+                                    <label htmlFor="exampleInputEmail1">Title</label>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           placeholder="Enter title"/>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputPassword1">Password</label>
-                                    <input type="password" className="form-control" id="exampleInputPassword1"
-                                           placeholder="Password"/>
+                                    <label >Genre</label>
+                                    <input type="text" className="form-control"
+                                           placeholder="Enter title"/>
                                 </div>
                                 <button type="submit" className="btn btn-primary">Submit</button>
                             </form>
