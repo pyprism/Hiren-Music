@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from 'components/layouts/Sidebar';
 import Navbar from 'components/layouts/Navbar';
 import Select from 'react-select';
+import sidebarCollapse from 'utils/sidebarCollapse';
 
 
 export default class Upload extends React.Component {
@@ -53,6 +54,7 @@ export default class Upload extends React.Component {
             this.props.history.push("/");
 
         document.title = "Hiren-Music: Upload";
+        sidebarCollapse();
 
         Promise.all([this.getMusician(), this.getAlbum()])
             .then(data =>  {
