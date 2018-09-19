@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import sidebarCollapse from '../../utils/sidebarCollapse';
-import '../../css/dashboard.css';
+import sidebarCollapse from 'utils/sidebarCollapse';
+import 'css/dashboard.css';
 
 export default class Content extends React.Component {
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import swal from 'sweetalert2'
-import '../../css/auth.css';
+import 'css/auth.css';
 
 
 export default class Register extends Component {

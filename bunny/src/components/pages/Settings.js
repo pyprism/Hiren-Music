@@ -1,12 +1,9 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
-import Sidebar from './../layouts/Sidebar';
-import Navbar from './../layouts/Navbar';
-import B2 from '../partials/B2';
-import '../../css/dashboard.css';
-import sidebarCollapse from '../../utils/sidebarCollapse';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faToolbox, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import Sidebar from 'components/layouts/Sidebar';
+import Navbar from 'components/layouts/Navbar';
+import B2 from 'components/partials/B2';
+import 'css/dashboard.css';
+import sidebarCollapse from 'utils/sidebarCollapse';
 
 
 export default class Settings extends React.Component {

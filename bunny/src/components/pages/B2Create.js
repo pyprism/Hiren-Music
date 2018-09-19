@@ -1,7 +1,7 @@
 import React from 'react';
-import Sidebar from './../layouts/Sidebar';
-import Navbar from './../layouts/Navbar';
-import sidebarCollapse from '../../utils/sidebarCollapse';
+import Sidebar from 'components/layouts/Sidebar';
+import Navbar from 'components/layouts/Navbar';
+import sidebarCollapse from 'utils/sidebarCollapse';
 import swal from 'sweetalert2';
 
 
