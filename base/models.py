@@ -57,6 +57,7 @@ class B2Account(models.Model):
     bucket_dir = models.CharField(max_length=50, null=True)
     download_token = models.CharField(max_length=200, null=True)
     upload_token = models.CharField(max_length=200, null=True)
+    upload_token_validity = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
