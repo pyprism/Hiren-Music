@@ -41,7 +41,8 @@ class Track(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     album = models.ForeignKey(Album, null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
-    tmp_upload = models.FileField(upload_to='music', null=True)
+    upload = models.FileField(upload_to='music/upload/', null=True)  # used for django upload
+    download = models.FileField(upload_to='music/download/', null=True)  # used for b2 file download
     b2_file_id = models.CharField(max_length=500, null=True)
     musician = models.ForeignKey(Musician, on_delete=models.PROTECT, null=True)
     youtube = models.URLField(max_length=200, null=True)
