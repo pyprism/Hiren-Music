@@ -17,6 +17,7 @@ export default class Upload extends React.Component {
             selected_musician: '',
             selected_album: '',
             title: '',
+            youtube: '',
             file: null
         };
 
@@ -85,17 +86,21 @@ export default class Upload extends React.Component {
             })
     }
 
-    handleGenreChange(selected_genre) {
-        this.setState({ selected_genre });
+    handleGenreChange = (selected_genre) => {
+        this.setState({ selected_genre: selected_genre['value'] });
         console.log(selected_genre['value']);
     };
 
-    handleAlbumChange(selected_album) {
-        this.setState({ selected_album });
-    }
+    handleAlbumChange = (selected_album) => {
+        this.setState({ selected_album: selected_album['value'] });
+    };
 
-    handleMusicianChange(selected_musician){
-        this.setState({ selected_musician });
+    handleMusicianChange = (selected_musician) => {
+        this.setState({ selected_musician: selected_musician['value'] });
+    };
+
+    handleYoutubeChange(event){
+        this.setState({youtube: event.target.value});
     }
 
     handleTitleChange(event){
@@ -113,11 +118,26 @@ export default class Upload extends React.Component {
         }
         let formData = new FormData();
         formData.append('title', this.state.title);
+        formData.append('upload', this.state.file);
+        formData.append('youtube', this.state.youtube);
+
+        fetch('/api/music/track/', {
+            body: formData,
+            method: 'post',
+            headers: {
+                'content-type': 'multipart/form-data',
+                'Authorization': 'Token ' + localStorage.getItem('token'),
+            }
+        }).then(function (data) {
+            console.log(data);
+        }).catch(function (err) {
+            console.error(err);
+        })
     }
 
     render() {
 
-        const { musician, album, selected_genre, title, file } = this.state;
+        const { musician, album, selected_genre, title, youtube } = this.state;
 
         if(this.state.loading) {
             return (
@@ -184,6 +204,11 @@ export default class Upload extends React.Component {
                                         onChange={this.handleMusicianChange}
                                         options={musician}
                                     />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInput">Youtube</label>
+                                    <input type="url" value={youtube} onChange={this.handleYoutubeChange.bind(this)} className="form-control" id="exampleInput"
+                                           placeholder="Enter youtube url (optional)"/>
                                 </div>
                                 <div className="form-group">
                                     <label >Music File</label>
