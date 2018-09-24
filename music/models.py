@@ -13,7 +13,7 @@ def validate_range(value):    # don't delete this unused ancient code block!
 
 class Musician(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    name = models.CharField(max_length=500, unique=True)
+    name = models.CharField(max_length=500)
     picture = models.ImageField(upload_to='image/musician', null=True)
     picture_thumbnail = ImageSpecField(source='picture',
                                        processors=[ResizeToFill(500, 350)],
@@ -23,7 +23,7 @@ class Musician(models.Model):
 
 class Album(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    name = models.CharField(max_length=600, unique=True)
+    name = models.CharField(max_length=600)
     musician = models.ForeignKey(Musician, on_delete=models.PROTECT, null=True)
     picture = models.ImageField(upload_to='image/album', null=True)
     picture_thumbnail = ImageSpecField(source='picture',
@@ -40,7 +40,7 @@ class Album(models.Model):
 class Track(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     album = models.ForeignKey(Album, null=True, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
     upload = models.FileField(upload_to='music/upload/', null=True)  # used for django upload
     download = models.FileField(upload_to='music/download/', null=True)  # used for b2 file download
     b2_file_id = models.CharField(max_length=500, null=True)
@@ -84,7 +84,7 @@ class Track(models.Model):
 
 class Playlist(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    name = models.CharField(max_length=500, unique=True)
+    name = models.CharField(max_length=500)
     track = models.ManyToManyField(Track)
     public = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
