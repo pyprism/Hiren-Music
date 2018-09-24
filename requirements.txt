@@ -6,6 +6,7 @@ django-cors-headers==2.4.0
 django-imagekit==4.0.2
 djangorestframework==3.8.2
 idna==2.7
+mutagen==1.41.1
 pilkit==2.0
 Pillow==5.2.0
 psycopg2==2.7.5
