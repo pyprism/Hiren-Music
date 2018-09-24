@@ -32,7 +32,6 @@ class Album(models.Model):
                                        options={'quality': 90})
     rating = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     favorite = models.BooleanField(default=False)
-    offline = models.BooleanField(default=False)
     archive = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -49,7 +48,6 @@ class Track(models.Model):
     favorite = models.BooleanField(default=False)
     counter = models.IntegerField(default=0)
     length = models.IntegerField(default=0)
-    offline = models.BooleanField(default=False)
     genre_type = (
         ('Fok', 'Folk'),
         ('Jaz', 'Jazz'),
@@ -85,7 +83,6 @@ class Playlist(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     name = models.CharField(max_length=500, unique=True)
     track = models.ManyToManyField(Track)
-    offline = models.BooleanField(default=False)
     public = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
