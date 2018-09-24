@@ -88,7 +88,6 @@ export default class Upload extends React.Component {
 
     handleGenreChange = (selected_genre) => {
         this.setState({ selected_genre: selected_genre['value'] });
-        console.log(selected_genre['value']);
     };
 
     handleAlbumChange = (selected_album) => {
@@ -116,19 +115,24 @@ export default class Upload extends React.Component {
         if(!this.state.file || this.state.title.length === 0) {
             return;
         }
+        let album = [{'name': this.state.selected_album, 'musician': {'name': this.state.selected_musician}}];
+
         let formData = new FormData();
         formData.append('title', this.state.title);
-        formData.append('upload', this.state.file);
+        //formData.append('upload', this.state.file);
         formData.append('youtube', this.state.youtube);
+        formData.append('genre', this.state.selected_genre);
+        formData.append('album', JSON.stringify(album));
 
         fetch('/api/music/track/', {
             body: formData,
             method: 'post',
             headers: {
-                'content-type': 'multipart/form-data',
                 'Authorization': 'Token ' + localStorage.getItem('token'),
             }
         }).then(function (data) {
+            return data.json();
+        }).then(function(data) {
             console.log(data);
         }).catch(function (err) {
             console.error(err);
