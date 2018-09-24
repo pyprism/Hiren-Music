@@ -42,12 +42,24 @@ class TrackSerializer(ModelSerializer):
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault(),
     )
-    album = AlbumSerializer(many=True)
-    musician = MusicianSerializer(many=True)
+    album = AlbumSerializer()
+    musician = MusicianSerializer()
+    upload = serializers.FileField(allow_null=True)
+    download = serializers.FileField(allow_null=True, read_only=True)
 
     class Meta:
         model = Track
         fields = '__all__'
+
+    def create(self, validated_data):
+        musician_data = validated_data.pop('musician')
+        album_data = validated_data.pop('album')
+        musician, created = Musician.objects.get_or_create(user=self.context['request'].user,
+                                                           name=musician_data['name'])
+        album, created = Album.objects.get_or_create(user=self.context['request'].user,
+                                                     name=album_data['name'])
+        track = Track.objects.create(album=album, musician=musician, **validated_data)
+        return track
 
 
 class PlaylistSerializer(ModelSerializer):
