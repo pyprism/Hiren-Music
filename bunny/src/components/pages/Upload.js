@@ -93,11 +93,11 @@ export default class Upload extends React.Component {
     };
 
     handleAlbumChange = (selected_album) => {
-        this.setState({ selected_album: selected_album['value'] });
+        this.setState({ selected_album});
     };
 
     handleMusicianChange = (selected_musician) => {
-        this.setState({ selected_musician: selected_musician['value'] });
+        this.setState({ selected_musician});
     };
 
     handleYoutubeChange(event){
@@ -123,9 +123,9 @@ export default class Upload extends React.Component {
         formData.append('upload', this.state.file);
         formData.append('youtube', this.state.youtube);
         formData.append('genre', this.state.selected_genre['value']);
-        formData.append('album.name', this.state.selected_album);
+        formData.append('album.name', this.state.selected_album['value']);
         formData.append('album.picture', '');
-        formData.append('album.musician.name', this.state.selected_musician);
+        formData.append('album.musician.name', this.state.selected_musician['value']);
         formData.append('album.musician.picture', '');
 
         fetch('/api/music/track/', {
