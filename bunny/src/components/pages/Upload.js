@@ -4,6 +4,7 @@ import Navbar from 'components/layouts/Navbar';
 import Select from 'react-select';
 import sidebarCollapse from 'utils/sidebarCollapse';
 import Creatable from 'react-select/lib/Creatable';
+import swal from 'sweetalert2';
 
 
 export default class Upload extends React.Component {
@@ -13,7 +14,7 @@ export default class Upload extends React.Component {
             loading: true,
             musician: [],
             album: [],
-            selected_genre: 'Und',
+            selected_genre: '',
             selected_musician: '',
             selected_album: '',
             title: '',
@@ -83,11 +84,12 @@ export default class Upload extends React.Component {
             })
             .catch(err => {
                 console.error(err);
+                swal("Error", "check console", "error");
             })
     }
 
     handleGenreChange = (selected_genre) => {
-        this.setState({ selected_genre: selected_genre['value'] });
+        this.setState({ selected_genre: selected_genre });
     };
 
     handleAlbumChange = (selected_album) => {
@@ -115,14 +117,16 @@ export default class Upload extends React.Component {
         if(!this.state.file || this.state.title.length === 0) {
             return;
         }
-        let album = [{'name': this.state.selected_album, 'musician': {'name': this.state.selected_musician}}];
 
         let formData = new FormData();
         formData.append('title', this.state.title);
-        //formData.append('upload', this.state.file);
+        formData.append('upload', this.state.file);
         formData.append('youtube', this.state.youtube);
-        formData.append('genre', this.state.selected_genre);
-        formData.append('album', JSON.stringify(album));
+        formData.append('genre', this.state.selected_genre['value']);
+        formData.append('album.name', this.state.selected_album);
+        formData.append('album.picture', '');
+        formData.append('album.musician.name', this.state.selected_musician);
+        formData.append('album.musician.picture', '');
 
         fetch('/api/music/track/', {
             body: formData,
@@ -131,10 +135,13 @@ export default class Upload extends React.Component {
                 'Authorization': 'Token ' + localStorage.getItem('token'),
             }
         }).then(function (data) {
-            return data.json();
+            if(data.status ===  201) {
+                return data.json()
+            } return "error";
         }).then(function(data) {
-            console.log(data);
-        }).catch(function (err) {
+            swal("Success", "New track has been uploaded", "success");
+        }.bind(this)).catch(function (err) {
+            swal("Error", "check console", "error");
             console.error(err);
         })
     }
