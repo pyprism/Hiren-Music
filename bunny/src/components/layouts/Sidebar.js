@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faToolbox, faSignOutAlt, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faMusic, faToolbox, faSignOutAlt, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 export default function Sidebar() {
     return (
@@ -13,8 +13,8 @@ export default function Sidebar() {
 
             <ul className="list-unstyled components">
                 <li>
-                    <NavLink to="/music">
-                        <FontAwesomeIcon icon={faHome} /> Home
+                    <NavLink to="/tracks">
+                        <FontAwesomeIcon icon={faMusic} /> Tracks
                     </NavLink>
                 </li>
                 <li>

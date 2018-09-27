@@ -20,8 +20,8 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="nav navbar-nav ml-auto">
                         <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName="active" to="/music">
-                                <FontAwesomeIcon icon={faMusic} /> Music</NavLink>
+                            <NavLink className="nav-link" activeClassName="active" to="/tracks">
+                                <FontAwesomeIcon icon={faMusic} /> Tracks</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="#" activeClassName="active" >
