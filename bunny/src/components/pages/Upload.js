@@ -137,9 +137,12 @@ export default class Upload extends React.Component {
         }).then(function (data) {
             if(data.status ===  201) {
                 return data.json()
+            } else if(data.status === 500) {
+                swal("Error", "Something went wrong on server side", "error");
             } return "error";
         }).then(function(data) {
-            swal("Success", "New track has been uploaded", "success");
+            if(data !== 'error')
+                swal("Success", "New track has been uploaded", "success");
         }.bind(this)).catch(function (err) {
             swal("Error", "check console", "error");
             console.error(err);
