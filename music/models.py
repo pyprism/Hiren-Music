@@ -47,7 +47,6 @@ class Track(models.Model):
     b2_file_id = models.CharField(max_length=500, null=True)
     musician = models.ForeignKey(Musician, on_delete=models.PROTECT, null=True)
     youtube = models.URLField(null=True)
-    location = models.CharField(max_length=500, default="")
     rating = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     favorite = models.BooleanField(default=False)
     counter = models.IntegerField(default=0)
