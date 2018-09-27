@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from .models import Musician, Track, Album, Playlist
+from utils.b2 import upload_track
 
 
 class MusicianSerializer(ModelSerializer):
@@ -60,6 +61,7 @@ class TrackSerializer(ModelSerializer):
         album, created = Album.objects.get_or_create(user=self.context['request'].user,
                                                      name=album_data['name'])
         track = Track.objects.create(album=album, musician=musician, **validated_data)
+        upload_track(self.context['request'].user)
         return track
 
 
