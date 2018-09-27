@@ -74,7 +74,7 @@ def upload_track(user):
         b2 = B2Account.objects.filter(user=user, upload=True).first()
     tracks = Track.objects.filter(user=user, b2_uploaded=False)
     for track in tracks:
-        name = urllib.parse.quote_plus(track.upload.name)
+        name = urllib.parse.quote_plus(track.upload.name[13:])   # strip music/upload/
         sha1 = hashlib.sha1()
         with open(track.upload.path, 'rb') as f:
             while True:
@@ -86,7 +86,7 @@ def upload_track(user):
 
         headers = {
             'Authorization': b2.upload_token,
-            'X-Bz-File-Name': name[15:],
+            'X-Bz-File-Name': name,
             'Content-Type': 'b2/x-auto',
             'X-Bz-Content-Sha1': length
         }
