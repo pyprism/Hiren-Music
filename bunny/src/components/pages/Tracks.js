@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import sidebarCollapse from 'utils/sidebarCollapse';
 import 'css/dashboard.css';
 
-export default class Content extends React.Component {
+export default class Tracks extends React.Component {
 
     componentDidMount() {
         if(!localStorage.getItem("token"))
