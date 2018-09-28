@@ -29,6 +29,12 @@ urlpatterns = [
 if not settings.DEBUG:
     urlpatterns += [
         re_path('.*', TemplateView.as_view(template_name='index.html')),
-]
+    ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^silk/', include('silk.urls', namespace='silk'))
+    ]
+
 
 
