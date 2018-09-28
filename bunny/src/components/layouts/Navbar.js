@@ -24,7 +24,7 @@ export default function Navbar() {
                                 <FontAwesomeIcon icon={faMusic} /> Tracks</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="#" activeClassName="active" >
+                            <NavLink className="nav-link" to="/albums" activeClassName="active" >
                                 <FontAwesomeIcon icon={faServer} /> Albums</NavLink>
                         </li>
                         <li className="nav-item">
