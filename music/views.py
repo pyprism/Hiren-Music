@@ -14,13 +14,13 @@ class MusicianViewSet(ModelViewSet):
 class AlbumViewSet(ModelViewSet):
     authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication)
     serializer_class = AlbumSerializer
-    queryset = Album.objects.all()
+    queryset = Album.objects.select_related('musician')
 
 
 class TrackViewSet(ModelViewSet):
     authentication_classes = (TokenAuthentication, BasicAuthentication, SessionAuthentication)
     serializer_class = TrackSerializer
-    queryset = Track.objects.all()
+    queryset = Track.objects.select_related('musician', 'album')
 
 
 class PlaylistViewSet(ModelViewSet):
