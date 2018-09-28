@@ -7,6 +7,7 @@ import Tracks from 'components/pages/Tracks';
 import B2Create from 'components/pages/B2Create';
 import Upload from 'components/pages/Upload';
 import Albums from 'components/pages/Albums';
+import Musicians from 'components/pages/Musicians';
 
 class App extends Component {
     render() {
@@ -20,6 +21,7 @@ class App extends Component {
                     <Route path="/B2" exact component={B2Create} />
                     <Route path="/upload" exact component={Upload} />
                     <Route path="/albums" exact component={Albums} />
+                    <Route path="/musicians" exact component={Musicians} />
                 </div>
             </Router>
         );
