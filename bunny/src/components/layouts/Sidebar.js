@@ -3,7 +3,13 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMusic, faToolbox, faSignOutAlt, faUpload } from "@fortawesome/free-solid-svg-icons";
 
-export default function Sidebar() {
+export default function Sidebar(props) {
+
+    function logout() {
+        localStorage.clear();
+        this.props.history.push("/");
+    }
+
     return (
         <React.Fragment>
             <nav id="sidebar">
@@ -29,7 +35,7 @@ export default function Sidebar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="#">
+                        <NavLink onClick={logout} to='#'>
                             <FontAwesomeIcon icon={faSignOutAlt}/> Logout
                         </NavLink>
                     </li>
