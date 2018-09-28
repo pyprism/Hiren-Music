@@ -60,6 +60,11 @@ if DEBUG is False:
         'raven.contrib.django.raven_compat',
     ]
 
+if DEBUG:
+    INSTALLED_APPS += [
+        'silk'
+    ]
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -71,6 +76,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    MIDDLEWARE += [
+        'silk.middleware.SilkyMiddleware',
+    ]
 
 ROOT_URLCONF = 'hiren.urls'
 
@@ -289,4 +299,7 @@ CORS_ALLOW_METHODS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# silk
+SILKY_PYTHON_PROFILER = True
+SILKY_PYTHON_PROFILER_BINARY = True
 
