@@ -2,6 +2,8 @@ import React from 'react';
 import Sidebar from 'components/layouts/Sidebar';
 import Navbar from 'components/layouts/Navbar';
 import sidebarCollapse from 'utils/sidebarCollapse';
+import Loading from 'components/partials/Loading';
+import TrackList from 'components/partials/TrackList';
 import 'css/dashboard.css';
 
 export default class Tracks extends React.Component {
@@ -10,7 +12,8 @@ export default class Tracks extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            tracks: []
+            tracks: [],
+            search: ""
         };
     }
 
@@ -52,7 +55,19 @@ export default class Tracks extends React.Component {
         })
     }
 
+    handleSearchChange(event) {
+        this.setState({search: event.target.value});
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        console.log(this.state.search);
+    }
+
     render() {
+
+        let {search} = this.state;
+
         if(this.state.loading) {
             return (
                 <div className="wrapper">
@@ -79,22 +94,26 @@ export default class Tracks extends React.Component {
         }
 
         return (
-                <div className="wrapper">
-                    <Sidebar/>
-                    <div id="content">
-                        <Navbar/>
-                        <div className="card shadow-lg">
-                            <h6 className="card-header text-left">
-                                All Tracks
-                            </h6>
-                            <div className="card-body">
-                                <div className="container mt-5">
-                                    sasa
+            <div className="wrapper">
+                <Sidebar/>
+                <div id="content">
+                    <Navbar/>
+                    <div className="card shadow-lg">
+                        <h6 className="card-header text-left">
+                            All Tracks
+                        </h6>
+                        <div className="card-body">
+                            <form onSubmit={this.handleSubmit.bind(this)}>
+                                <div className="form-group">
+                                    <input type="text" value={search} onChange={this.handleSearchChange.bind(this)} className="form-control" id="exampleInputEmail1"
+                                           placeholder="Search track"/>
                                 </div>
-                            </div>
+                            </form>
+                            <TrackList tracks={this.state.tracks}/>
                         </div>
                     </div>
                 </div>
-            )
+            </div>
+        )
     }
 }
