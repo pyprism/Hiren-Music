@@ -13,7 +13,9 @@ export default class Tracks extends React.Component {
         this.state = {
             loading: true,
             tracks: [],
-            search: ""
+            search: false,
+            search_result: [],
+            search_text: ''
         };
     }
 
@@ -56,17 +58,25 @@ export default class Tracks extends React.Component {
     }
 
     handleSearchChange(event) {
-        this.setState({search: event.target.value});
+        if(event.target.value.length <= 1)  // reset state after zero search text
+            this.setState({search: false});
+        this.setState({search_text: event.target.value});
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state.search);
+        let results = [];
+        let regexp = new RegExp(this.state.search_text, 'gi');
+        this.state.tracks.forEach((post) => {
+            if (post["title"].match(regexp)) results.push(post);
+        });
+
+        this.setState({search_result: results, search: true});
     }
 
     render() {
 
-        let {search} = this.state;
+        let {search_text} = this.state;
 
         if(this.state.loading) {
             return (
@@ -105,11 +115,11 @@ export default class Tracks extends React.Component {
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit.bind(this)}>
                                 <div className="form-group">
-                                    <input type="text" value={search} onChange={this.handleSearchChange.bind(this)} className="form-control" id="exampleInputEmail1"
+                                    <input type="text" value={search_text} onChange={this.handleSearchChange.bind(this)} className="form-control" id="exampleInputEmail1"
                                            placeholder="Search track"/>
                                 </div>
                             </form>
-                            <TrackList tracks={this.state.tracks}/>
+                            {this.state.search?  <TrackList tracks={this.state.search_result}/> : <TrackList tracks={this.state.tracks}/>}
                         </div>
                     </div>
                 </div>
