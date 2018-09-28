@@ -28,8 +28,8 @@ export default function Navbar() {
                                 <FontAwesomeIcon icon={faServer} /> Albums</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="#" activeClassName="active">
-                                <FontAwesomeIcon icon={faUserAlt} /> Artists</NavLink>
+                            <NavLink className="nav-link" to="/musicians" activeClassName="active">
+                                <FontAwesomeIcon icon={faUserAlt} /> Musicians</NavLink>
                         </li>
                     </ul>
                 </div>
