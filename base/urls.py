@@ -8,6 +8,7 @@ router.register('settings', views.SettingsModelView)
 
 urlpatterns = [
     path('login/', views.login, name='login'),
+    path('space/', views.StorageView.as_view()),
     path('register/', views.register, name='register'),
     path('b2/', include(router.urls)),
 ]
