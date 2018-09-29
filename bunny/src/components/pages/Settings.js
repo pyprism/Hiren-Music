@@ -23,6 +23,7 @@ export default class Settings extends React.Component {
                 <div id="content">
                     <Navbar/>
                     <B2/>
+                    <span/>
                     <Storage/>
                 </div>
             </div>
