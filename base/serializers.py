@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from .models import Setting, B2Account
+from utils.storage import check_storage
 
 
 class BlackbazeSerializer(ModelSerializer):
@@ -24,3 +25,8 @@ class SettingsSerializer(ModelSerializer):
         model = Setting
         fields = ('active', 'user')
 
+
+class StorageSerializer(serializers.Serializer):
+    base = serializers.JSONField()
+    upload = serializers.JSONField()
+    download = serializers.JSONField()
