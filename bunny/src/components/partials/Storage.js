@@ -33,7 +33,7 @@ export default class Storage extends React.Component {
                 <div className={(this.state.base['percentage'] >= 50) ? 'progress-bar bg-danger' : 'progress-bar bg-info'} role="progressbar" style={{'width': this.state.base['percentage'] + '%'}} aria-valuenow={this.state.base['percentage']}
                      aria-valuemin="0" aria-valuemax="100">
                     <small className="justify-content-center d-flex position-absolute w-100" style={{'fontSize': '15px'}}>
-                        App directory{this.state.base['percentage'] + '%'} used, {this.state.base['free']} free
+                        App directory{this.state.base['percentage'] + '%'} used, {this.state.base['used']} used
                     </small>
                 </div>
             </div>
@@ -46,7 +46,7 @@ export default class Storage extends React.Component {
                 <div className={(this.state.upload['percentage'] >= 50) ? 'progress-bar bg-danger' : 'progress-bar bg-info'} role="progressbar" style={{'width': this.state.upload['percentage'] + '%'}} aria-valuenow={this.state.upload['percentage']}
                      aria-valuemin="0" aria-valuemax="100">
                     <small className="justify-content-center d-flex position-absolute w-100" style={{'fontSize': '15px'}}>
-                        Upload directory {this.state.upload['percentage'] + '%'} used, {this.state.upload['free']} free
+                        Upload directory {this.state.upload['percentage'] + '%'} used, {this.state.upload['used']} used
                     </small>
                 </div>
             </div>
@@ -59,7 +59,7 @@ export default class Storage extends React.Component {
                 <div className={(this.state.download['percentage'] >= 50) ? 'progress-bar bg-danger' : 'progress-bar bg-info'} role="progressbar" style={{'width': this.state.download['percentage'] + '%'}} aria-valuenow={this.state.download['percentage']}
                      aria-valuemin="0" aria-valuemax="100">
                     <small className="justify-content-center d-flex position-absolute w-100" style={{'fontSize': '15px'}}>
-                        Download directory {this.state.download['percentage'] + '%'} used, {this.state.download['free']} free
+                        Download directory {this.state.download['percentage'] + '%'} used, {this.state.download['used']} used
                     </small>
                 </div>
             </div>
