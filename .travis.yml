@@ -8,8 +8,6 @@ cache: pip
 addons:
   postgresql: "9.6"
 
-env:
-  - DEBUG=True
 
 install:
   - pip install -r requirements.txt --quiet
