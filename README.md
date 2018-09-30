@@ -1,1 +1,1 @@
-# Hiren-Music  [![Build Status](https://travis-ci.org/pyprism/Hiren-Music.svg?branch=master)](https://travis-ci.org/pyprism/Hiren-Music)
+# Hiren-Music  [![Build Status](https://travis-ci.org/pyprism/Hiren-Music.svg?branch=master)](https://travis-ci.org/pyprism/Hiren-Music) [![Coverage Status](https://coveralls.io/repos/github/pyprism/Hiren-Music/badge.svg?branch=master)](https://coveralls.io/github/pyprism/Hiren-Music?branch=master)
