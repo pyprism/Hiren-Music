@@ -28,5 +28,3 @@ class SettingsSerializer(ModelSerializer):
 
 class StorageSerializer(serializers.Serializer):
     base = serializers.JSONField()
-    upload = serializers.JSONField()
-    download = serializers.JSONField()
