@@ -7,7 +7,7 @@ django-cors-headers==2.4.0
 django-imagekit==4.0.2
 django-silk==3.0.1
 djangorestframework==3.8.2
-gprof2dot==2016.10.13
+gprof2dot==2017.9.19
 idna==2.7
 Jinja2==2.10
 MarkupSafe==1.0
