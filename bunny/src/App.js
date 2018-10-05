@@ -7,6 +7,8 @@ import B2Create from 'components/pages/B2Create';
 import Upload from 'components/pages/Upload';
 import Albums from 'components/pages/Albums';
 import Musicians from 'components/pages/Musicians';
+import audioPlayer from 'utils/audioPlayer';
+
 
 class App extends Component {
     render() {
@@ -14,7 +16,7 @@ class App extends Component {
             <Router>
                 <DashboardLayout>
                     <Switch>
-                        <Route path="/music/tracks" component={Tracks} />
+                        <Route path="/music/tracks" component={Tracks} track={audioPlayer.track}/>
                         <Route path="/music/settings" component={Settings} />
                         <Route path="/music/B2" component={B2Create} />
                         <Route path="/music/upload" component={Upload} />
