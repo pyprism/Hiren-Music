@@ -16,7 +16,7 @@ class Login extends Component {
 
     componentDidMount() {
         if(localStorage.getItem("token"))
-            this.props.history.push("/tracks");
+            this.props.history.push("/music/tracks");
         document.title = "Hiren-Music: Login";
     }
 

@@ -1,8 +1,5 @@
 import React from 'react';
-import Sidebar from 'components/layouts/Sidebar';
-import Navbar from 'components/layouts/Navbar';
 import sidebarCollapse from 'utils/sidebarCollapse';
-import Loading from 'components/partials/Loading';
 import TrackList from 'components/partials/TrackList';
 import 'css/dashboard.css';
 
@@ -80,21 +77,15 @@ export default class Tracks extends React.Component {
 
         if(this.state.loading) {
             return (
-                <div className="wrapper">
-                    <Sidebar/>
-                    <div id="content">
-                        <Navbar/>
-                        <div className="card shadow-lg">
-                            <h6 className="card-header text-left">
-                                All Tracks
-                            </h6>
-                            <div className="card-body">
-                                <div className="container mt-5">
-                                    <div className="row">
-                                        <div className="col">
-                                            <img className="img-fluid d-block mx-auto" alt="loading indicator" src={require("../../image/loading.svg")} />
-                                        </div>
-                                    </div>
+                <div className="card shadow-lg">
+                    <h6 className="card-header text-left">
+                        All Tracks
+                    </h6>
+                    <div className="card-body">
+                        <div className="container mt-5">
+                            <div className="row">
+                                <div className="col">
+                                    <img className="img-fluid d-block mx-auto" alt="loading indicator" src={require("../../image/loading.svg")} />
                                 </div>
                             </div>
                         </div>
@@ -104,24 +95,18 @@ export default class Tracks extends React.Component {
         }
 
         return (
-            <div className="wrapper">
-                <Sidebar/>
-                <div id="content">
-                    <Navbar/>
-                    <div className="card shadow-lg">
-                        <h6 className="card-header text-left">
-                            All Tracks
-                        </h6>
-                        <div className="card-body">
-                            <form onSubmit={this.handleSubmit.bind(this)}>
-                                <div className="form-group">
-                                    <input type="text" value={search_text} onChange={this.handleSearchChange.bind(this)} className="form-control" id="exampleInputEmail1"
-                                           placeholder="Search track"/>
-                                </div>
-                            </form>
-                            {this.state.search?  <TrackList tracks={this.state.search_result}/> : <TrackList tracks={this.state.tracks}/>}
+            <div className="card shadow-lg">
+                <h6 className="card-header text-left">
+                    All Tracks
+                </h6>
+                <div className="card-body">
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <div className="form-group">
+                            <input type="text" value={search_text} onChange={this.handleSearchChange.bind(this)} className="form-control" id="exampleInputEmail1"
+                                   placeholder="Search track"/>
                         </div>
-                    </div>
+                    </form>
+                    {this.state.search?  <TrackList tracks={this.state.search_result}/> : <TrackList tracks={this.state.tracks}/>}
                 </div>
             </div>
         )

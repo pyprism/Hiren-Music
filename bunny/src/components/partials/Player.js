@@ -1,7 +1,4 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMusic, faToolbox, faSignOutAlt, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 
 export default class Player extends React.Component {
@@ -10,9 +7,6 @@ export default class Player extends React.Component {
         console.log("asa");
     }
 
-    shouldComponentUpdate(){
-        return false;
-    }
 
     render() {
         return (

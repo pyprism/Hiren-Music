@@ -20,15 +20,15 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="nav navbar-nav ml-auto">
                         <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName="active" to="/tracks">
+                            <NavLink className="nav-link" activeClassName="active" to="/music/tracks">
                                 <FontAwesomeIcon icon={faMusic} /> Tracks</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/albums" activeClassName="active" >
+                            <NavLink className="nav-link" to="/music/albums" activeClassName="active" >
                                 <FontAwesomeIcon icon={faServer} /> Albums</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/musicians" activeClassName="active">
+                            <NavLink className="nav-link" to="/music/musicians" activeClassName="active">
                                 <FontAwesomeIcon icon={faUserAlt} /> Musicians</NavLink>
                         </li>
                     </ul>

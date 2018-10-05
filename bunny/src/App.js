@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route} from "react-router-dom";
-import Login from "components/pages/Login";
-import Register from "components/pages/Register";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import DashboardLayout from 'components/layouts/DashboardLayout';
 import Settings from "components/pages/Settings";
 import Tracks from 'components/pages/Tracks';
 import B2Create from 'components/pages/B2Create';
@@ -13,16 +12,16 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <div>
-                    <Route path="/" exact component={Login} />
-                    <Route path="/register" exact component={Register} />
-                    <Route path="/tracks" exact component={Tracks} />
-                    <Route path="/settings" exact component={Settings} />
-                    <Route path="/B2" exact component={B2Create} />
-                    <Route path="/upload" exact component={Upload} />
-                    <Route path="/albums" exact component={Albums} />
-                    <Route path="/musicians" exact component={Musicians} />
-                </div>
+                <DashboardLayout>
+                    <Switch>
+                        <Route path="/music/tracks" component={Tracks} />
+                        <Route path="/music/settings" component={Settings} />
+                        <Route path="/music/B2" component={B2Create} />
+                        <Route path="/music/upload" component={Upload} />
+                        <Route path="/music/albums" component={Albums} />
+                        <Route path="/music/musicians" component={Musicians} />
+                    </Switch>
+                </DashboardLayout>
             </Router>
         );
     }

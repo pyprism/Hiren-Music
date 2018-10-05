@@ -57,7 +57,7 @@ export default class B2Create extends React.Component {
             return data.json();
         }).then(function (data) {
             this.setState({app_key: "", app_key_id: "", upload: false});
-            this.props.history.push("/settings");
+            this.props.history.push("/music/settings");
             swal("Saved", "B2 account details has been added", "success");
         }.bind(this)).catch(function(err) {
            console.error(err);

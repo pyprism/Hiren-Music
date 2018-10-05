@@ -39,7 +39,7 @@ export default class B2 extends React.Component {
                             </div>
                         </div>
                         <div style={{'marginTop': '50px'}}>
-                            <Link to='/B2'>
+                            <Link to='/music/B2'>
                                 <button type="button" className="btn btn-primary float-left">
                                     Add Account
                                 </button>

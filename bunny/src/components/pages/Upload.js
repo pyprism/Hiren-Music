@@ -1,6 +1,4 @@
 import React from 'react';
-import Sidebar from 'components/layouts/Sidebar';
-import Navbar from 'components/layouts/Navbar';
 import Select from 'react-select';
 import sidebarCollapse from 'utils/sidebarCollapse';
 import Creatable from 'react-select/lib/Creatable';
@@ -155,21 +153,15 @@ export default class Upload extends React.Component {
 
         if(this.state.loading) {
             return (
-                <div className="wrapper">
-                    <Sidebar/>
-                    <div id="content">
-                        <Navbar/>
-                        <div className="card shadow-lg">
-                            <h6 className="card-header text-left">
-                                Upload New Song
-                            </h6>
-                            <div className="card-body">
-                                <div className="container mt-5">
-                                    <div className="row">
-                                        <div className="col">
-                                            <img className="img-fluid d-block mx-auto" alt="loading indicator" src={require("../../image/loading.svg")} />
-                                        </div>
-                                    </div>
+                <div className="card shadow-lg">
+                    <h6 className="card-header text-left">
+                        Upload New Song
+                    </h6>
+                    <div className="card-body">
+                        <div className="container mt-5">
+                            <div className="row">
+                                <div className="col">
+                                    <img className="img-fluid d-block mx-auto" alt="loading indicator" src={require("../../image/loading.svg")} />
                                 </div>
                             </div>
                         </div>
@@ -178,60 +170,54 @@ export default class Upload extends React.Component {
             )
         }
         return (
-            <div className="wrapper">
-                <Sidebar/>
-                <div id="content">
-                    <Navbar/>
-                    <div className="card shadow-lg">
-                        <h6 className="card-header text-left">
-                            Upload New Song
-                        </h6>
-                        <div className="card-body">
-                            <form onSubmit={this.handleSubmit.bind(this)}>
-                                <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Title</label>
-                                    <input type="text" value={title} onChange={this.handleTitleChange.bind(this)} className="form-control" id="exampleInputEmail1"
-                                           placeholder="Enter title"/>
-                                </div>
-                                <div className="form-group">
-                                    <label >Genre</label>
-                                    <Select
-                                        isClearable
-                                        value={selected_genre}
-                                        onChange={this.handleGenreChange}
-                                        options={this.genre_options}
-                                        isSearchable
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label >Album</label>
-                                    <Creatable
-                                        isClearable
-                                        onChange={this.handleAlbumChange}
-                                        options={album}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label >Musician</label>
-                                    <Creatable
-                                        isClearable
-                                        onChange={this.handleMusicianChange}
-                                        options={musician}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="exampleInput">Youtube</label>
-                                    <input type="url" value={youtube} onChange={this.handleYoutubeChange.bind(this)} className="form-control" id="exampleInput"
-                                           placeholder="Enter youtube url (optional)"/>
-                                </div>
-                                <div className="form-group">
-                                    <label >Music File</label>
-                                    <input type="file" onChange={this.handleFileChange.bind(this)} className="form-control-file" accept="audio/*" />
-                                </div>
-                                <button type="submit" className="btn btn-primary">Upload</button>
-                            </form>
+            <div className="card shadow-lg">
+                <h6 className="card-header text-left">
+                    Upload New Song
+                </h6>
+                <div className="card-body">
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputEmail1">Title</label>
+                            <input type="text" value={title} onChange={this.handleTitleChange.bind(this)} className="form-control" id="exampleInputEmail1"
+                                   placeholder="Enter title"/>
                         </div>
-                    </div>
+                        <div className="form-group">
+                            <label >Genre</label>
+                            <Select
+                                isClearable
+                                value={selected_genre}
+                                onChange={this.handleGenreChange}
+                                options={this.genre_options}
+                                isSearchable
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label >Album</label>
+                            <Creatable
+                                isClearable
+                                onChange={this.handleAlbumChange}
+                                options={album}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label >Musician</label>
+                            <Creatable
+                                isClearable
+                                onChange={this.handleMusicianChange}
+                                options={musician}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleInput">Youtube</label>
+                            <input type="url" value={youtube} onChange={this.handleYoutubeChange.bind(this)} className="form-control" id="exampleInput"
+                                   placeholder="Enter youtube url (optional)"/>
+                        </div>
+                        <div className="form-group">
+                            <label >Music File</label>
+                            <input type="file" onChange={this.handleFileChange.bind(this)} className="form-control-file" accept="audio/*" />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Upload</button>
+                    </form>
                 </div>
             </div>
         )

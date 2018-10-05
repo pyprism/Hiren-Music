@@ -1,8 +1,5 @@
 import React from 'react';
-import Sidebar from 'components/layouts/Sidebar';
-import Navbar from 'components/layouts/Navbar';
 import sidebarCollapse from 'utils/sidebarCollapse';
-import Loading from 'components/partials/Loading';
 import MusicianList from 'components/partials/MusicianList';
 import 'css/dashboard.css';
 
@@ -75,21 +72,15 @@ export default class Musicians extends React.Component {
 
         if(this.state.loading) {
             return (
-                <div className="wrapper">
-                    <Sidebar/>
-                    <div id="content">
-                        <Navbar/>
-                        <div className="card shadow-lg">
-                            <h6 className="card-header text-left">
-                                All Musicians
-                            </h6>
-                            <div className="card-body">
-                                <div className="container mt-5">
-                                    <div className="row">
-                                        <div className="col">
-                                            <img className="img-fluid d-block mx-auto" alt="loading indicator" src={require("../../image/loading.svg")} />
-                                        </div>
-                                    </div>
+                <div className="card shadow-lg">
+                    <h6 className="card-header text-left">
+                        All Musicians
+                    </h6>
+                    <div className="card-body">
+                        <div className="container mt-5">
+                            <div className="row">
+                                <div className="col">
+                                    <img className="img-fluid d-block mx-auto" alt="loading indicator" src={require("../../image/loading.svg")} />
                                 </div>
                             </div>
                         </div>
@@ -99,24 +90,18 @@ export default class Musicians extends React.Component {
         }
 
         return (
-            <div className="wrapper">
-                <Sidebar/>
-                <div id="content">
-                    <Navbar/>
-                    <div className="card shadow-lg">
-                        <h6 className="card-header text-left">
-                            All Musicians
-                        </h6>
-                        <div className="card-body">
-                            <form onSubmit={this.handleSubmit.bind(this)}>
-                                <div className="form-group">
-                                    <input type="text" value={search_text} onChange={this.handleSearchChange.bind(this)} className="form-control" id="exampleInputEmail1"
-                                           placeholder="Search musician"/>
-                                </div>
-                            </form>
-                            {this.state.search?  <MusicianList musicians={this.state.search_result}/> : <MusicianList musicians={this.state.musicians}/>}
+            <div className="card shadow-lg">
+                <h6 className="card-header text-left">
+                    All Musicians
+                </h6>
+                <div className="card-body">
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <div className="form-group">
+                            <input type="text" value={search_text} onChange={this.handleSearchChange.bind(this)} className="form-control" id="exampleInputEmail1"
+                                   placeholder="Search musician"/>
                         </div>
-                    </div>
+                    </form>
+                    {this.state.search?  <MusicianList musicians={this.state.search_result}/> : <MusicianList musicians={this.state.musicians}/>}
                 </div>
             </div>
         )

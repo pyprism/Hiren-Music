@@ -21,17 +21,17 @@ export default function Sidebar(props) {
 
                 <ul className="list-unstyled components">
                     <li>
-                        <NavLink to="/tracks">
+                        <NavLink to="/music/tracks">
                             <FontAwesomeIcon icon={faMusic} /> Tracks
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/upload">
+                        <NavLink to="/music/upload">
                             <FontAwesomeIcon icon={faUpload} /> Upload
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/settings">
+                        <NavLink to="/music/settings">
                             <FontAwesomeIcon icon={faToolbox}/> Settings
                         </NavLink>
                     </li>
