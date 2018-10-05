@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Player from 'components/partials/Player';
 import { faMusic, faToolbox, faSignOutAlt, faUpload } from "@fortawesome/free-solid-svg-icons";
 
-export default function Sidebar(props) {
+export default function Sidebar() {
 
     function logout() {
         localStorage.clear();
-        this.props.history.push("/");
+        window.location.href="/";
     }
 
     return (
