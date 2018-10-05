@@ -44,7 +44,7 @@ class Login extends Component {
         }).then(function (data) {
             if(data.token) {
                 localStorage.setItem("token", data.token);
-                this.props.history.push("/tracks");
+                this.props.history.push("/music/tracks");
             } else if(data.error) {
                 this.setState({username: "", password: "", repeat_password: ""});
                 swal("Error", data.error, "error");
