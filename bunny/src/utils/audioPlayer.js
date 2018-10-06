@@ -1,12 +1,17 @@
 import {Howl, Howler} from 'howler';
 
-const randomx = () => {
+function random(){
     console.log("random");
-};
+}
 
-const track = (id=null, all=false) => {
-    console.log(id);
-    console.log(all);
-};
+function track(music=null, all=false){
+    if(!all) {
+        const sound = new Howl({
+            src: [music.upload],
+            html5: true
+        });
+        sound.play();
+    }
+}
 
-export const audioPlayer = track, randomx;
+export default {track, random};
