@@ -4,6 +4,12 @@ import {faPlayCircle} from "@fortawesome/free-solid-svg-icons";
 
 
 export default function TrackList(props) {
+
+    function playSong(id) {
+        let music = props.tracks[id];
+        props.track(music);
+    }
+
     return(
         <table className="table">
             <thead>
@@ -17,7 +23,7 @@ export default function TrackList(props) {
             {props.tracks.map((track, i) => {
                 return (
                     <tr key={i+1}>
-                        <th><button className='btn btn-default btn-circle'><FontAwesomeIcon icon={faPlayCircle} /></button></th>
+                        <th><button className='btn btn-default btn-circle' onClick={() => playSong(i)}><FontAwesomeIcon icon={faPlayCircle} /></button></th>
                         <td ><a href={track} target="_blank">{track.title}</a></td>
                         <td>{track.musician}</td>
                     </tr>
