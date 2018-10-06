@@ -106,7 +106,7 @@ export default class Tracks extends React.Component {
                                    placeholder="Search track"/>
                         </div>
                     </form>
-                    {this.state.search?  <TrackList tracks={this.state.search_result}/> : <TrackList tracks={this.state.tracks}/>}
+                    {this.state.search?  <TrackList tracks={this.state.search_result} track={this.props.track.track}/> : <TrackList tracks={this.state.tracks} track={this.props.track.track}/>}
                 </div>
             </div>
         )
