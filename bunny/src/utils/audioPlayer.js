@@ -19,8 +19,13 @@ function track(music=null, all=false){
             src: [music.upload],
             html5: true
         });
+        window.sound = sound;
         sound.play();
     }
 }
 
-export default {track, random, changeVol, stop};
+function pause() {
+    window.sound.pause(null);
+}
+
+export default {track, random, changeVol, stop, pause};

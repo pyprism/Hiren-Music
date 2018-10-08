@@ -25,6 +25,10 @@ export default class Player extends React.Component {
         audioPlayer.stop();
     }
 
+    changePlayState() {
+        this.setState({playing: !this.state.playing});
+    }
+
     playButton() {
         if(this.state.playing)
             return (
