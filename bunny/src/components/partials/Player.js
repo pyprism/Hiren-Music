@@ -1,7 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPlayCircle, faStepBackward, faStepForward} from "@fortawesome/free-solid-svg-icons";
-import {faVolumeDown, faVolumeUp, faRandom} from "@fortawesome/free-solid-svg-icons";
+import {faVolumeDown, faVolumeUp, faRandom, faStopCircle} from "@fortawesome/free-solid-svg-icons";
+import audioPlayer from 'utils/audioPlayer';
 
 
 export default class Player extends React.Component {
@@ -13,8 +14,15 @@ export default class Player extends React.Component {
         };
     }
 
-    componentDidMount(){
-        console.log("asa");
+    changeSound(e) {
+        e.preventDefault();
+        let vol = e.target.value / 10;
+        audioPlayer.changeVol(vol);
+    }
+
+    stopTrack(e) {
+        e.preventDefault();
+        audioPlayer.stop();
     }
 
     playButton() {
@@ -43,6 +51,11 @@ export default class Player extends React.Component {
                             </a>
                         </li>
                         <li className="nav-item">
+                            <a className="nav-link" href="#" onClick={this.stopTrack}>
+                                 <FontAwesomeIcon icon={faStopCircle} size="2x"/>
+                            </a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" href="#">
                                 <FontAwesomeIcon icon={faStepForward} size="2x"/>
                             </a>
@@ -58,7 +71,7 @@ export default class Player extends React.Component {
                             </a>
                         </li>
                         <li className="nav-item" style={{'marginTop': '12px'}}>
-                            <input type="range" min="0" max="100" step="1"/>
+                            <input type="range" min="1" max="10" step="1" onChange={this.changeSound}/>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">
