@@ -10,7 +10,7 @@ djangorestframework==3.8.2
 gprof2dot==2017.9.19
 idna==2.7
 Jinja2==2.10
-MarkupSafe==1.0
+MarkupSafe==1.1.0
 mutagen==1.41.1
 pilkit==2.0
 Pillow==5.3.0
