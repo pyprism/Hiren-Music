@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPlayCircle, faStepBackward, faStepForward} from "@fortawesome/free-solid-svg-icons";
 import {faVolumeDown, faVolumeUp, faRandom, faStopCircle} from "@fortawesome/free-solid-svg-icons";
 import audioPlayer from 'utils/audioPlayer';
+import {observer} from "mobx-react";
 
 
-export default class Player extends React.Component {
+const Player =  observer(class Player extends React.Component {
 
     constructor(props) {
         super(props);
@@ -82,10 +83,13 @@ export default class Player extends React.Component {
                                 <FontAwesomeIcon icon={faVolumeUp} size="2x"/>
                             </a>
                         </li>
+                        <li className="nav-item">asasa4a5s54s5a4s</li>
                     </ul>
                 </div>
             </nav>
         )
     }
-}
+});
+
+export default Player;
 

@@ -1,31 +1,43 @@
 import {Howl, Howler} from 'howler';
+import {observable, autorun, action, decorate, computed} from "mobx";
 
-function random(){
-    console.log("random");
-}
+class AudioPlayer {
 
-function stop() {
-    window.Howler.unload();
-}
+    random(){
+        console.log("random");
+    }
 
-function changeVol(value) {
-    window.Howler.volume(value);
-}
+    stop() {
+        window.Howler.unload();
+    }
 
-function track(music=null, all=false){
-    stop();
-    if(!all) {
-        const sound = new Howl({
-            src: [music.upload],
-            html5: true
-        });
-        window.sound = sound;
-        sound.play();
+    changeVol(value) {
+        window.Howler.volume(value);
+    }
+
+    track(music=null, all=false) {
+        this.stop();
+        if (!all) {
+            const sound = new Howl({
+                src: [music.upload],
+                html5: true
+            });
+            window.sound = sound;
+            sound.play();
+        }
+    }
+
+    pause(){
+        window.sound.pause(null);
     }
 }
 
-function pause() {
-    window.sound.pause(null);
-}
+const audioPlayer = decorate(AudioPlayer, {
+    songName: observable,
+    random: computed,
+    stop: computed,
+    changeVol: computed,
+    track: computed
+});
 
-export default {track, random, changeVol, stop, pause};
+export default audioPlayer;

@@ -1,13 +1,15 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPlayCircle} from "@fortawesome/free-solid-svg-icons";
+import CurrentList from 'store/Playlist';
 
 
 export default function TrackList(props) {
 
     function playSong(id) {
         let music = props.tracks[id];
-        props.track(music);
+        CurrentList(props.tracks);
+        //props.track.audioPlayer.track(music);
     }
 
     return(
