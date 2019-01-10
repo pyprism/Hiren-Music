@@ -8,7 +8,7 @@ django-imagekit==4.0.2
 django-silk==3.0.1
 djangorestframework==3.9.0
 gprof2dot==2017.9.19
-idna==2.7
+idna==2.8
 Jinja2==2.10
 MarkupSafe==1.1.0
 mutagen==1.42.0
