@@ -21,7 +21,7 @@ python-dateutil==2.7.5
 pytz==2018.9
 raven==6.9.0
 requests==2.20.1
-six==1.11.0
+six==1.12.0
 sqlparse==0.2.4
 urllib3==1.24.1
 uWSGI==2.0.17.1
