@@ -1,7 +1,7 @@
 autopep8==1.4.3
 certifi==2019.3.9
 chardet==3.0.4
-Django==2.1.7
+Django==2.2.1
 django-appconf==1.0.3
 django-cors-headers==2.5.1
 django-imagekit==4.0.2
