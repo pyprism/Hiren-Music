@@ -13,7 +13,7 @@ Jinja2==2.10.1
 MarkupSafe==1.1.1
 mutagen==1.42.0
 pilkit==2.0
-Pillow==6.2.2
+Pillow==7.1.2
 psycopg2==2.8.5
 pycodestyle==2.5.0
 Pygments==2.3.1
