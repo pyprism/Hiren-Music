@@ -15,7 +15,7 @@ mutagen==1.45.0
 pilkit==2.0
 Pillow==7.1.2
 psycopg2==2.8.5
-pycodestyle==2.5.0
+pycodestyle==2.6.0
 Pygments==2.6.1
 python-dateutil==2.8.0
 pytz==2020.1
