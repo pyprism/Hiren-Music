@@ -8,4 +8,4 @@ django-cors-headers==3.4.0
 django-imagekit==4.0.2
 Pillow==7.1.2
 requests==2.24.0
-mutagen==1.45.0
+mutagen==1.45.1
