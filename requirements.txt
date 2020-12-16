@@ -7,5 +7,5 @@ djangorestframework==3.11.0
 django-cors-headers==3.4.0
 django-imagekit==4.0.2
 Pillow==7.1.2
-requests==2.24.0
+requests==2.25.1
 mutagen==1.45.0
