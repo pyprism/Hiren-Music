@@ -4,7 +4,7 @@ psycopg2-binary==2.8.5
 sentry-sdk==0.16.0
 uWSGI==2.0.19.1
 djangorestframework==3.11.0
-django-cors-headers==3.4.0
+django-cors-headers==3.7.0
 django-imagekit==4.0.2
 Pillow==7.1.2
 requests==2.24.0
