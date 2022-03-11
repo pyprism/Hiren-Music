@@ -6,6 +6,6 @@ uWSGI==2.0.19.1
 djangorestframework==3.11.0
 django-cors-headers==3.4.0
 django-imagekit==4.0.2
-Pillow==7.1.2
+Pillow==9.0.1
 requests==2.24.0
 mutagen==1.45.0
